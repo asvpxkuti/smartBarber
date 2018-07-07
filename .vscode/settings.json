@@ -1,3 +1,7 @@
 {
-    "terminal.integrated.shellArgs.windows": ["/K", "C:\\cmder_mini\\vscode.bat"],
+    "terminal.integrated.shellArgs.windows": [
+        "/K",
+        "C:\\cmder_mini\\vscode.bat"
+    ],
+    "git.ignoreLimitWarning": true,
 }
