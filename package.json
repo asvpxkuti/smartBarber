@@ -2,9 +2,9 @@
   "name": "geecuts-ser",
   "version": "1.0.0",
   "description": "Geecuts",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node app"
+    "start": "node index"
   },
   "dependencies": {
     "bcrypt": "^3.0.0",
