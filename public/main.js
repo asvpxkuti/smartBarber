@@ -333,14 +333,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var routes = [
-    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    { path: '', component: _pages_login_app_login_app_component__WEBPACK_IMPORTED_MODULE_6__["LoginAppComponent"] },
     { path: 'home', component: _pages_about_company_about_company_component__WEBPACK_IMPORTED_MODULE_0__["AboutCompanyComponent"] },
     { path: 'customers', component: _pages_contact_us_contact_us_component__WEBPACK_IMPORTED_MODULE_1__["ContactUsComponent"] },
     { path: 'contact', component: _pages_email_contacts_email_contacts_component__WEBPACK_IMPORTED_MODULE_2__["EmailContactsComponent"] },
     { path: 'success', component: _pages_success_success_component__WEBPACK_IMPORTED_MODULE_3__["SuccessComponent"] },
     { path: 'edit-client', component: _pages_edit_client_edit_client_component__WEBPACK_IMPORTED_MODULE_4__["EditClientComponent"] },
     { path: 'implicit/callback', component: _okta_okta_angular__WEBPACK_IMPORTED_MODULE_5__["OktaCallbackComponent"] },
-    { path: 'login', component: _pages_login_app_login_app_component__WEBPACK_IMPORTED_MODULE_6__["LoginAppComponent"] },
+    { path: 'dashboard', component: _pages_login_app_login_app_component__WEBPACK_IMPORTED_MODULE_6__["LoginAppComponent"] },
     { path: 'create', component: _pages_register_register_component__WEBPACK_IMPORTED_MODULE_7__["RegisterComponent"] },
     { path: 'error', component: _pages_error_page_error_page_component__WEBPACK_IMPORTED_MODULE_8__["ErrorPageComponent"] }
 ];
@@ -1567,10 +1567,10 @@ var ClientService = /** @class */ (function () {
         return this._http.post("/client/sendmail", data, options);
     };
     ClientService.prototype.registerBarber = function (data, options) {
-        return this._http.post("/user/register", data, options);
+        return this._http.post("/client/register", data, options);
     };
     ClientService.prototype.login = function (data, options) {
-        return this._http.post("/user/login", data, options);
+        return this._http.post("/client/authenticate", data, options);
     };
     ClientService.prototype.getClientDetails = function (id) {
         return this._http.get("/client" + id);
