@@ -1567,10 +1567,10 @@ var ClientService = /** @class */ (function () {
         return this._http.post("/client/sendmail", data, options);
     };
     ClientService.prototype.registerBarber = function (data, options) {
-        return this._http.post("/geecuts/register", data, options);
+        return this._http.post("/user/register", data, options);
     };
     ClientService.prototype.login = function (data, options) {
-        return this._http.post("/geecuts/login", data, options);
+        return this._http.post("/user/login", data, options);
     };
     ClientService.prototype.getClientDetails = function (id) {
         return this._http.get("/client" + id);
