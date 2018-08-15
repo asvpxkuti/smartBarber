@@ -23,7 +23,7 @@ router.post('/register', (req, res, next) => {
 });
 
 // Authenticate
-router.post('/authenticate', (req, res, next) => {
+/* router.post('/authenticate', (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
 
@@ -53,6 +53,41 @@ router.post('/authenticate', (req, res, next) => {
         return res.json({success: false, msg: 'Wrong password'});
       }
     });
+  });
+}); */
+
+router.post('/authenticate', (req, res) => {
+  barberUser.findOne({
+    email: req.body.email
+  }, function(err, username) {
+    if (err) throw err;
+
+    if (!username) {
+      res.send({
+        success: false,
+        message: 'Authentication failed. User not found.'
+      });
+    } else {
+      // Check if password matches
+      barberUser.comparePassword(req.body.password,username.password, function(err, isMatch) {
+        if (isMatch && !err) {
+          // Create token if the password matched and no error was thrown
+          var token = jwt.sign({auth: username.username},config.secret , {
+            expiresIn: "1 days"
+          });
+          res.json({
+            success: true,
+            message: 'Authentication successfull',
+            token
+          });
+        } else {
+          res.send({
+            success: false,
+            message: 'Authentication failed. Passwords did not match.'
+          });
+        }
+      });
+    }
   });
 });
 
