@@ -1,64 +1,63 @@
-const express = require('express');
-const router = express.Router();
-const passport = require('passport');
-const jwt = require('jsonwebtoken');
-const config = require('../config/database');
-const User = require('../models/user');
+var express = require('express');
+var router_ = express.Router();
+var passport = require('passport');
+let jwt = require('jsonwebtoken');
+const config = require('../config/index');
+const barberUser = require('../models/Users');
 
-// Register
-router.post('/register', (req, res, next) => {
-  let newUser = new User ({
-    name: req.body.name,
-    email: req.body.email,
-    username: req.body.username,
-    password: req.body.password
-  });
-  User.addUser(newUser, (err, user) => {
-    if(err) {
-      res.json({success: false, msg: 'Failed to register user'});
+
+// Authenticate the user and get a JSON Web Token to include in the header of future requests.
+router_.post('/login', (req, res) => {
+  barberUser.findOne({
+    email: req.body.email
+  }, function(err, username) {
+    if (err) throw err;
+
+    if (!username) {
+      res.send({
+        success: false,
+        message: 'Authentication failed. User not found.'
+      });
     } else {
-      res.json({success: true, msg: 'User registered'});
+      // Check if password matches
+      barberUser.comparePassword(req.body.password,username.password, function(err, isMatch) {
+        if (isMatch && !err) {
+          // Create token if the password matched and no error was thrown
+          var token = jwt.sign({auth: username.username},config.secret , {
+            expiresIn: "1 days"
+          });
+          res.json({
+            success: true,
+            message: 'Authentication successfull',
+            token
+          });
+        } else {
+          res.send({
+            success: false,
+            message: 'Authentication failed. Passwords did not match.'
+          });
+        }
+      });
     }
   });
 });
 
-// Authenticate
-router.post('/authenticate', (req, res, next) => {
-  const username = req.body.username;
-  const password = req.body.password;
-
-  User.getUserByUsername(username, (err, user) => {
-    if(err) throw err;
-    if(!user) {
-      return res.json({success: false, msg: 'User not found'});
-    }
-
-    User.comparePassword(password, user.password, (err, isMatch) => {
-      if(err) throw err;
-      if(isMatch) {
-        const token = jwt.sign({data: user}, config.secret, {
-          expiresIn: 604800 // 1 week
-        });
+router_.post('/register',(req, res)=>{
+    console.log(JSON.stringify(req.body));
+  
+    if (!req.body.email || !req.body.password) {
         res.json({
-          success: true,
-          token: 'JWT '+token,
-          user: {
-            id: user._id,
-            name: user.name,
-            username: user.username,
-            email: user.email
-          }
-        })
-      } else {
-        return res.json({success: false, msg: 'Wrong password'});
-      }
-    });
-  });
+          success: false,
+          message: 'Please enter email and password.'
+        });
+      } else {barberUser.addUser(req,res);}
 });
 
-// Profile
-router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {
-  res.json({user: req.user});
+router_.get('/home', passport.authenticate('jwt', {
+  session: false
+}), function(req, res) {
+  res.send('It worked! User id is: ' + req.user._id + '.');
 });
 
-module.exports = router;
+
+module.exports = router_;
