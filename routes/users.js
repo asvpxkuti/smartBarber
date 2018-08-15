@@ -4,57 +4,104 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 const User = require('../models/user');
+const Client = require('../models/Client');
 const barberUser = require('../models/Users');
 // Register
-router.post('/register', (req, res, next) => {
-  let newUser = new User ({
-    name: req.body.name,
-    email: req.body.email,
-    username: req.body.username,
-    password: req.body.password
-  });
-  User.addUser(newUser, (err, user) => {
-    if(err) {
-      res.json({success: false, msg: 'Failed to register user'});
-    } else {
-      res.json({success: true, msg: 'User registered'});
+
+
+/* GET ALL CLIENT */
+router.get('/', function(req, res) {
+  Client.find(function (err, clients) {
+    if (err){
+      handleError(res,err.message,'data not found');
     }
+    ;
+    res.json(clients);
+  });   
+});
+
+
+/* GET SINGLE CLIENT BY ID */
+router.get('/:id', function(req, res, next) {
+  Client.findById(req.params.id, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
   });
 });
 
-// Authenticate
-/* router.post('/authenticate', (req, res, next) => {
-  const username = req.body.username;
-  const password = req.body.password;
+/* SAVE CLIENT */
+router.post('/save', function(req, res, next) {
+  Client.create(req.body, function (err, post) {
+    if (err) return next(err);
+    console.log("saving" + JSON.stringify(req.body));
+    res.json(post);
+  });
+});
 
-  User.getUserByUsername(username, (err, user) => {
-    if(err) throw err;
-    if(!user) {
-      return res.json({success: false, msg: 'User not found'});
-    }
+/* UPDATE CLIENT */
+router.put('/:id', function(req, res, next) {
+  Client.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
 
-    User.comparePassword(password, user.password, (err, isMatch) => {
-      if(err) throw err;
-      if(isMatch) {
-        const token = jwt.sign({data: user}, config.secret, {
-          expiresIn: 604800 // 1 week
-        });
-        res.json({
-          success: true,
-          token: 'JWT '+token,
-          user: {
-            id: user._id,
-            name: user.name,
-            username: user.username,
-            email: user.email
-          }
-        })
-      } else {
-        return res.json({success: false, msg: 'Wrong password'});
+/* DELETE BOOK */
+router.delete('/:id', function(req, res, next) {
+  Client.findByIdAndRemove(req.params.id, req.body, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+
+
+//Email Client
+ router.post('/sendmail', function(req, res) {
+  
+  console.log('loading request body '+ JSON.stringify(req.body));
+  console.log('request data '+ req.body.email);
+  nodemailer.createTestAccount((err, account) => {
+    // create reusable transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+        //host: 'smtp.gmail.com',
+        service:'gmail',
+        //port: 587,
+        //secure: false, // true for 465, false for other ports
+        auth: {
+            user: 'eroppong@gmail.com', // generated ethereal user
+            pass: 'home1990' // generated ethereal password
+        },
+        tls: {
+          rejectUnauthorized: false
       }
     });
+  
+    // setup email data with unicode symbols
+    let mailOptions = {
+        from: '"Geecuts" <eroppong@gmail.com>', // sender address
+        to: req.body.email, // list of receivers
+        subject: 'Your Appointment has been booked', // Subject line
+        text: 'Thank you for your business', // plain text body
+        html: '<h2>Congratulations Appointment Booked:</h2>'+
+        '<p>Please see below for details</p>'+
+        '<p>Your Appointment is Booked For: <b>'+req.body.date+'</b></p>'+
+        '<p>Price for service: <b>'+req.body.job+'</b></p>'
+    };
+  
+    // send mail with defined transport object
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            return console.log(error);
+        }else{
+          res.json({msg:'email sent',success:true})
+        }
+        console.log('Message sent: %s', info.messageId);
+        // Preview only available when sending through an Ethereal account
+        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+    });
   });
-}); */
+  
+});
 
 router.post('/authenticate', (req, res) => {
   barberUser.findOne({
@@ -91,9 +138,52 @@ router.post('/authenticate', (req, res) => {
   });
 });
 
-// Profile
-router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {
-  res.json({user: req.user});
+router.post('/register',(req, res)=>{
+    console.log(JSON.stringify(req.body));
+  
+    if (!req.body.email || !req.body.password) {
+        res.json({
+          success: false,
+          message: 'Please enter email and password.'
+        });
+      } else {barberUser.addUser(req,res);}
 });
+
+router.post('/authenticate', (req, res) => {
+  barberUser.findOne({
+    email: req.body.email
+  }, function(err, username) {
+    if (err) throw err;
+
+    if (!username) {
+      res.send({
+        success: false,
+        message: 'Authentication failed. User not found.'
+      });
+    } else {
+      // Check if password matches
+      barberUser.comparePassword(req.body.password,username.password, function(err, isMatch) {
+        if (isMatch && !err) {
+          // Create token if the password matched and no error was thrown
+          var token = jwt.sign({auth: username.username},config.secret , {
+            expiresIn: "1 days"
+          });
+          res.json({
+            success: true,
+            message: 'Authentication successfull',
+            token
+          });
+        } else {
+          res.send({
+            success: false,
+            message: 'Authentication failed. Passwords did not match.'
+          });
+        }
+      });
+    }
+  });
+});
+
+
 
 module.exports = router;
