@@ -51,7 +51,7 @@ app.use(passport.session());
 
 require('./config/passport')(passport);
 
-app.use('/users', users);
+app.use('/kobe', users);
 
 // Index Routes
 app.get('/', (req, res) => {
