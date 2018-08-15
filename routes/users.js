@@ -63,10 +63,10 @@ router.delete('/:id', function(req, res, next) {
   nodemailer.createTestAccount((err, account) => {
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
-        //host: 'smtp.gmail.com',
+        host: 'smtp.gmail.com',
         service:'gmail',
-        //port: 587,
-        //secure: false, // true for 465, false for other ports
+        port: 587,
+        secure: false, // true for 465, false for other ports
         auth: {
             user: 'eroppong@gmail.com', // generated ethereal user
             pass: 'home1990' // generated ethereal password
