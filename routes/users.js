@@ -4,7 +4,7 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 const User = require('../models/user');
-const barberUser = require('../models/Users');
+//const User = require('../models/Users');
 // Register
 router.post('/register', (req, res, next) => {
   let newUser = new User ({
@@ -57,7 +57,7 @@ router.post('/register', (req, res, next) => {
 }); */
 
 router.post('/authenticate', (req, res) => {
-  barberUser.findOne({
+  User.findOne({
     email: req.body.email
   }, function(err, username) {
     if (err) throw err;
@@ -69,7 +69,7 @@ router.post('/authenticate', (req, res) => {
       });
     } else {
       // Check if password matches
-      barberUser.comparePassword(req.body.password,username.password, function(err, isMatch) {
+      User.comparePassword(req.body.password,username.password, function(err, isMatch) {
         if (isMatch && !err) {
           // Create token if the password matched and no error was thrown
           var token = jwt.sign({auth: username.username},config.secret , {
