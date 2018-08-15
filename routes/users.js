@@ -4,9 +4,9 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 const User = require('../models/user');
-const Client = require('../models/Client');
+const Client = require('../models/Clients');
 const barberUser = require('../models/Users');
-// Register
+
 
 
 /* GET ALL CLIENT */
