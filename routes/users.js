@@ -6,7 +6,7 @@ const config = require('../config/database');
 const User = require('../models/user');
 const Client = require('../models/Clients');
 const barberUser = require('../models/Users');
-
+var nodemailer = require('nodemailer');
 
 
 /* GET ALL CLIENT */
@@ -71,7 +71,7 @@ router.delete('/:id', function(req, res, next) {
             user: 'eroppong@gmail.com', // generated ethereal user
             pass: 'home1990' // generated ethereal password
         },
-        tls: {
+         tls: {
           rejectUnauthorized: false
       }
     });
