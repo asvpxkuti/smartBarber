@@ -1,7 +1,5 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
-var passportLocalMongoose = require('passport-local-mongoose');
-
 
 var BarberSchema = new mongoose.Schema({
   username: {
