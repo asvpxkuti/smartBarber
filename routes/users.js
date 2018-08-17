@@ -66,7 +66,7 @@ router.delete('/:id', function(req, res, next) {
         host: 'smtp.gmail.com',
         service:'gmail',
         //port: 587,
-        secure: false, // true for 465, false for other ports
+       // true for 465, false for other ports
         auth: {
             user: 'geecuts1@gmail.com', // generated ethereal user
             pass: 'geecutz9087' // generated ethereal password
