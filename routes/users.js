@@ -65,11 +65,11 @@ router.delete('/:id', function(req, res, next) {
     let transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
         service:'gmail',
-        port: 587,
+        //port: 587,
         secure: false, // true for 465, false for other ports
         auth: {
-            user: 'eroppong@gmail.com', // generated ethereal user
-            pass: 'home1990' // generated ethereal password
+            user: 'geecuts1@gmail.com', // generated ethereal user
+            pass: 'geecutz9087' // generated ethereal password
         },
          tls: {
           rejectUnauthorized: false
@@ -78,8 +78,8 @@ router.delete('/:id', function(req, res, next) {
   
     // setup email data with unicode symbols
     let mailOptions = {
-        from: '"Geecuts" <eroppong@gmail.com>', // sender address
-        to: req.body.email, // list of receivers
+        from: '"Geecuts" <geecuts1@gmail.com>', // sender address
+        to: req.body.email+','+'geecuts1@gmail.com', // list of receivers
         subject: 'Your Appointment has been booked', // Subject line
         text: 'Thank you for your business', // plain text body
         html: '<h2>Congratulations Appointment Booked:</h2>'+
