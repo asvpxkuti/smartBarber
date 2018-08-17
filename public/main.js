@@ -1617,16 +1617,16 @@ var ClientService = (function () {
         return this._http.delete("/client/" + id);
     };
     ClientService.prototype.saveClient = function (data, options) {
-        return this._http.post("http://localhost:5000/client/save", data, options);
+        return this._http.post("/client/save", data, options);
     };
     ClientService.prototype.sendClientData = function (data, options) {
-        return this._http.post("http://localhost:5000/client/sendmail", data, options);
+        return this._http.post("/client/sendmail", data, options);
     };
     ClientService.prototype.registerBarber = function (data, options) {
-        return this._http.post("http://localhost:5000/user/register", data, options);
+        return this._http.post("/client/register", data, options);
     };
     ClientService.prototype.login = function (data, options) {
-        return this._http.post("http://localhost:5000/user/authenticate", data, options);
+        return this._http.post("/client/authenticate", data, options);
     };
     ClientService.prototype.getClientDetails = function (id) {
         return this._http.get("/client" + id);
