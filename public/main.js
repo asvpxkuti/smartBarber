@@ -314,16 +314,13 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "routes", function() { return routes; });
 /* harmony import */ var _pages_about_company_about_company_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../pages/about-company/about-company.component */ "./src/app/pages/about-company/about-company.component.ts");
-/* harmony import */ var _pages_contact_us_contact_us_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../pages/contact-us/contact-us.component */ "./src/app/pages/contact-us/contact-us.component.ts");
+/* harmony import */ var _pages_customers_customers_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../pages/customers/customers.component */ "./src/app/pages/customers/customers.component.ts");
 /* harmony import */ var _pages_email_contacts_email_contacts_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pages/email-contacts/email-contacts.component */ "./src/app/pages/email-contacts/email-contacts.component.ts");
 /* harmony import */ var _pages_success_success_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../pages/success/success.component */ "./src/app/pages/success/success.component.ts");
 /* harmony import */ var _pages_edit_client_edit_client_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../pages/edit-client/edit-client.component */ "./src/app/pages/edit-client/edit-client.component.ts");
-/* harmony import */ var _okta_okta_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @okta/okta-angular */ "./node_modules/@okta/okta-angular/dist/index.js");
-/* harmony import */ var _okta_okta_angular__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_okta_okta_angular__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _pages_login_app_login_app_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../pages/login-app/login-app.component */ "./src/app/pages/login-app/login-app.component.ts");
-/* harmony import */ var _pages_register_register_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../pages/register/register.component */ "./src/app/pages/register/register.component.ts");
-/* harmony import */ var _pages_error_page_error_page_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../pages/error-page/error-page.component */ "./src/app/pages/error-page/error-page.component.ts");
-
+/* harmony import */ var _pages_login_app_login_app_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../pages/login-app/login-app.component */ "./src/app/pages/login-app/login-app.component.ts");
+/* harmony import */ var _pages_register_register_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../pages/register/register.component */ "./src/app/pages/register/register.component.ts");
+/* harmony import */ var _pages_error_page_error_page_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../pages/error-page/error-page.component */ "./src/app/pages/error-page/error-page.component.ts");
 
 
 
@@ -333,16 +330,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var routes = [
-    { path: '', component: _pages_login_app_login_app_component__WEBPACK_IMPORTED_MODULE_6__["LoginAppComponent"] },
+    { path: '', component: _pages_login_app_login_app_component__WEBPACK_IMPORTED_MODULE_5__["LoginAppComponent"] },
     { path: 'home', component: _pages_about_company_about_company_component__WEBPACK_IMPORTED_MODULE_0__["AboutCompanyComponent"] },
-    { path: 'customers', component: _pages_contact_us_contact_us_component__WEBPACK_IMPORTED_MODULE_1__["ContactUsComponent"] },
+    { path: 'customers', component: _pages_customers_customers_component__WEBPACK_IMPORTED_MODULE_1__["CustomersComponent"] },
     { path: 'contact', component: _pages_email_contacts_email_contacts_component__WEBPACK_IMPORTED_MODULE_2__["EmailContactsComponent"] },
     { path: 'success', component: _pages_success_success_component__WEBPACK_IMPORTED_MODULE_3__["SuccessComponent"] },
     { path: 'edit-client', component: _pages_edit_client_edit_client_component__WEBPACK_IMPORTED_MODULE_4__["EditClientComponent"] },
-    { path: 'implicit/callback', component: _okta_okta_angular__WEBPACK_IMPORTED_MODULE_5__["OktaCallbackComponent"] },
-    { path: 'dashboard', component: _pages_login_app_login_app_component__WEBPACK_IMPORTED_MODULE_6__["LoginAppComponent"] },
-    { path: 'create', component: _pages_register_register_component__WEBPACK_IMPORTED_MODULE_7__["RegisterComponent"] },
-    { path: 'error', component: _pages_error_page_error_page_component__WEBPACK_IMPORTED_MODULE_8__["ErrorPageComponent"] }
+    { path: 'dashboard', component: _pages_login_app_login_app_component__WEBPACK_IMPORTED_MODULE_5__["LoginAppComponent"] },
+    { path: 'create', component: _pages_register_register_component__WEBPACK_IMPORTED_MODULE_6__["RegisterComponent"] },
+    { path: 'error', component: _pages_error_page_error_page_component__WEBPACK_IMPORTED_MODULE_7__["ErrorPageComponent"] }
 ];
 
 
@@ -366,7 +362,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<router-outlet></router-outlet>\n<app-footer></app-footer>\n"
+module.exports = "<router-outlet></router-outlet>\n<spinner spinner=\"sk-chasing-dots\"></spinner>\n<app-footer></app-footer>\n"
 
 /***/ }),
 
@@ -388,7 +384,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 
-var AppComponent = /** @class */ (function () {
+var AppComponent = (function () {
     function AppComponent() {
         this.title = 'app';
     }
@@ -429,18 +425,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_header_header_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./pages/header/header.component */ "./src/app/pages/header/header.component.ts");
 /* harmony import */ var _pages_image_loader_image_loader_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./pages/image-loader/image-loader.component */ "./src/app/pages/image-loader/image-loader.component.ts");
 /* harmony import */ var _pages_success_success_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./pages/success/success.component */ "./src/app/pages/success/success.component.ts");
-/* harmony import */ var _pages_contact_us_contact_us_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./pages/contact-us/contact-us.component */ "./src/app/pages/contact-us/contact-us.component.ts");
+/* harmony import */ var _pages_customers_customers_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./pages/customers/customers.component */ "./src/app/pages/customers/customers.component.ts");
 /* harmony import */ var _pages_email_contacts_email_contacts_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./pages/email-contacts/email-contacts.component */ "./src/app/pages/email-contacts/email-contacts.component.ts");
 /* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/esm5/animations.js");
 /* harmony import */ var ng_pick_datetime__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ng-pick-datetime */ "./node_modules/ng-pick-datetime/picker.js");
 /* harmony import */ var _pages_edit_client_edit_client_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./pages/edit-client/edit-client.component */ "./src/app/pages/edit-client/edit-client.component.ts");
 /* harmony import */ var _directives_update_onblur_directive__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./directives/update-onblur.directive */ "./src/app/directives/update-onblur.directive.ts");
-/* harmony import */ var _okta_okta_angular__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @okta/okta-angular */ "./node_modules/@okta/okta-angular/dist/index.js");
-/* harmony import */ var _okta_okta_angular__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(_okta_okta_angular__WEBPACK_IMPORTED_MODULE_19__);
-/* harmony import */ var _pages_login_app_login_app_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./pages/login-app/login-app.component */ "./src/app/pages/login-app/login-app.component.ts");
-/* harmony import */ var _pages_register_register_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./pages/register/register.component */ "./src/app/pages/register/register.component.ts");
-/* harmony import */ var ngx_moment__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ngx-moment */ "./node_modules/ngx-moment/esm5/ngx-moment.js");
-/* harmony import */ var _pages_error_page_error_page_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./pages/error-page/error-page.component */ "./src/app/pages/error-page/error-page.component.ts");
+/* harmony import */ var _pages_login_app_login_app_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./pages/login-app/login-app.component */ "./src/app/pages/login-app/login-app.component.ts");
+/* harmony import */ var _pages_register_register_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./pages/register/register.component */ "./src/app/pages/register/register.component.ts");
+/* harmony import */ var ngx_moment__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ngx-moment */ "./node_modules/ngx-moment/esm5/ngx-moment.js");
+/* harmony import */ var _pages_error_page_error_page_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./pages/error-page/error-page.component */ "./src/app/pages/error-page/error-page.component.ts");
+/* harmony import */ var ng_http_loader_ng_http_loader_module__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ng-http-loader/ng-http-loader.module */ "./node_modules/ng-http-loader/ng-http-loader.module.js");
+/* harmony import */ var ng_http_loader_ng_http_loader_module__WEBPACK_IMPORTED_MODULE_23___default = /*#__PURE__*/__webpack_require__.n(ng_http_loader_ng_http_loader_module__WEBPACK_IMPORTED_MODULE_23__);
+/* harmony import */ var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ngx-cookie-service */ "./node_modules/ngx-cookie-service/index.js");
+/* harmony import */ var _pages_logout_logout_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./pages/logout/logout.component */ "./src/app/pages/logout/logout.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -471,12 +469,9 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-var config = {
-    issuer: 'https://dev-739617.oktapreview.com/oauth2/default',
-    redirectUri: 'http://localhost:4200/implicit/callback',
-    clientId: '0oaftq0n12U7ld1I90h7'
-};
-var AppModule = /** @class */ (function () {
+
+
+var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
@@ -489,25 +484,26 @@ var AppModule = /** @class */ (function () {
                 _pages_image_loader_image_loader_component__WEBPACK_IMPORTED_MODULE_11__["ImageLoaderComponent"],
                 _pages_success_success_component__WEBPACK_IMPORTED_MODULE_12__["SuccessComponent"],
                 _directives_update_onblur_directive__WEBPACK_IMPORTED_MODULE_18__["UpdateOnblurDirective"],
-                _pages_contact_us_contact_us_component__WEBPACK_IMPORTED_MODULE_13__["ContactUsComponent"],
+                _pages_customers_customers_component__WEBPACK_IMPORTED_MODULE_13__["CustomersComponent"],
                 _pages_email_contacts_email_contacts_component__WEBPACK_IMPORTED_MODULE_14__["EmailContactsComponent"],
                 _pages_edit_client_edit_client_component__WEBPACK_IMPORTED_MODULE_17__["EditClientComponent"],
-                _pages_login_app_login_app_component__WEBPACK_IMPORTED_MODULE_20__["LoginAppComponent"],
-                _pages_register_register_component__WEBPACK_IMPORTED_MODULE_21__["RegisterComponent"],
-                _pages_error_page_error_page_component__WEBPACK_IMPORTED_MODULE_23__["ErrorPageComponent"]
+                _pages_login_app_login_app_component__WEBPACK_IMPORTED_MODULE_19__["LoginAppComponent"],
+                _pages_register_register_component__WEBPACK_IMPORTED_MODULE_20__["RegisterComponent"],
+                _pages_error_page_error_page_component__WEBPACK_IMPORTED_MODULE_22__["ErrorPageComponent"],
+                _pages_logout_logout_component__WEBPACK_IMPORTED_MODULE_25__["LogoutComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormsModule"],
-                _okta_okta_angular__WEBPACK_IMPORTED_MODULE_19__["OktaAuthModule"],
-                ngx_moment__WEBPACK_IMPORTED_MODULE_22__["MomentModule"],
+                ngx_moment__WEBPACK_IMPORTED_MODULE_21__["MomentModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClientModule"],
+                ng_http_loader_ng_http_loader_module__WEBPACK_IMPORTED_MODULE_23__["NgHttpLoaderModule"],
                 _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_15__["BrowserAnimationsModule"],
                 ng_pick_datetime__WEBPACK_IMPORTED_MODULE_16__["OwlDateTimeModule"],
                 ng_pick_datetime__WEBPACK_IMPORTED_MODULE_16__["OwlNativeDateTimeModule"],
                 _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forRoot(_app_routes_routes__WEBPACK_IMPORTED_MODULE_3__["routes"])
             ],
-            providers: [_service_client_service__WEBPACK_IMPORTED_MODULE_5__["ClientService"]],
+            providers: [_service_client_service__WEBPACK_IMPORTED_MODULE_5__["ClientService"], ngx_cookie_service__WEBPACK_IMPORTED_MODULE_24__["CookieService"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
         })
     ], AppModule);
@@ -541,7 +537,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
-var UpdateOnblurDirective = /** @class */ (function () {
+var UpdateOnblurDirective = (function () {
     function UpdateOnblurDirective(el, ngModel) {
         this.el = el;
         this.ngModel = ngModel;
@@ -609,7 +605,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
-var AboutCompanyComponent = /** @class */ (function () {
+var AboutCompanyComponent = (function () {
     function AboutCompanyComponent(clientService) {
         this.clientService = clientService;
     }
@@ -631,10 +627,10 @@ var AboutCompanyComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/pages/contact-us/contact-us.component.css":
-/*!***********************************************************!*\
-  !*** ./src/app/pages/contact-us/contact-us.component.css ***!
-  \***********************************************************/
+/***/ "./src/app/pages/customers/customers.component.css":
+/*!*********************************************************!*\
+  !*** ./src/app/pages/customers/customers.component.css ***!
+  \*********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -642,27 +638,27 @@ module.exports = ""
 
 /***/ }),
 
-/***/ "./src/app/pages/contact-us/contact-us.component.html":
-/*!************************************************************!*\
-  !*** ./src/app/pages/contact-us/contact-us.component.html ***!
-  \************************************************************/
+/***/ "./src/app/pages/customers/customers.component.html":
+/*!**********************************************************!*\
+  !*** ./src/app/pages/customers/customers.component.html ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-header></app-header>  \n<section class=\"mani-section\">\n        <h2 class=\"text-center\">Current Appointments</h2> \n        <div class=\"table-responsive\">\n          <table class=\"table table-striped\">\n            <thead>\n              <tr>\n                <th>No.</th>\n                <th>Customer</th>\n                <th>Customer Email</th>\n                <th>Day of Appt.</th>\n                <th>Date Submitted</th>\n                <th>Edit</th>\n                <th>Cancel Appt.</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr *ngFor=\"let data of clientInfo; let i = index\">\n                <td>{{i + 1}}</td>\n                <td>{{data.name}}</td>\n                <td>{{data.email}}</td>\n                <td>{{data.date}}</td>\n                <td>{{data.submitted_date}}</td>\n                <td><button type=\"button\" class=\"btn btn-success\" (click)=\"edit(data._id)\">Update</button></td>\n                <td><button type=\"button\" class=\"btn btn-danger\">Delete</button></td>\n              </tr>\n            </tbody>\n          </table>\n        </div>\n</section>\n\n\n\n\n"
+module.exports = "<app-header></app-header>\n<section class=\"mani-section\">\n        <h2 class=\"text-center\">Current Appointments</h2> \n        <div class=\"table-responsive\">\n          <table class=\"table table-striped\">\n            <thead>\n              <tr>\n                <th>No.</th>\n                <th>Customer</th>\n                <th>Customer Email</th>\n                <th>Day of Appt.</th>\n                <th>Date Submitted</th>\n                <th>Edit</th>\n                <th>Cancel Appt.</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr *ngFor=\"let data of clientInfo; let i = index\">\n                <td>{{i + 1}}</td>\n                <td>{{data.name}}</td>\n                <td>{{data.email}}</td>\n                <td>{{data.date}}</td>\n                <td>{{data.submitted_date | amDateFormat:'MMMM Do YYYY, h:mm:ss a'}}</td>\n                <td><button type=\"button\" class=\"btn btn-success\" (click)=\"edit(data._id)\">Update</button></td>\n                <td><button type=\"button\" class=\"btn btn-danger\" (click)=\"delete(data._id)\">Delete</button></td>\n              </tr>\n            </tbody>\n          </table>\n        </div>\n</section>\n\n\n\n\n"
 
 /***/ }),
 
-/***/ "./src/app/pages/contact-us/contact-us.component.ts":
-/*!**********************************************************!*\
-  !*** ./src/app/pages/contact-us/contact-us.component.ts ***!
-  \**********************************************************/
-/*! exports provided: ContactUsComponent */
+/***/ "./src/app/pages/customers/customers.component.ts":
+/*!********************************************************!*\
+  !*** ./src/app/pages/customers/customers.component.ts ***!
+  \********************************************************/
+/*! exports provided: CustomersComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContactUsComponent", function() { return ContactUsComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CustomersComponent", function() { return CustomersComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/esm5/http.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/esm5/router.js");
@@ -680,51 +676,29 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-var ContactUsComponent = /** @class */ (function () {
-    function ContactUsComponent(_http, clientService, router) {
+var CustomersComponent = (function () {
+    function CustomersComponent(_http, clientService, router) {
         this._http = _http;
         this.clientService = clientService;
         this.router = router;
         this.clientModel = {
             time: '',
         };
-        this.times = ['10:00 AM', '10:30 PM', '11:00 AM',
-            '11:30 AM', '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM',
-            '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM',
-            '4:00 PM', '4:30 PM', '5:00 PM', '5:30 PM',
-            '6:00 PM', '6:30 PM', '7:00 PM', '7:30 PM',
-            '8:00 PM', '8:30 PM', '9:00 PM', '9:30 PM',
-        ];
+        this.valid = true;
     }
-    ContactUsComponent.prototype.disableEnterKey = function (event) {
+    CustomersComponent.prototype.disableEnterKey = function (event) {
         if (event.keyCode === 13) {
             event.preventDefault();
-            //console.log('nice try');
             return false;
         }
     };
-    ContactUsComponent.prototype.bookAppointment = function (elem) {
-        debugger;
-        elem.target.style.backgroundColor = 'yellow';
-        this.clientModel.time = elem.target.value;
-        this.allButtons = document.querySelectorAll('input.btn');
-        this.allButtons.forEach(function (elemVal) {
-            if (elemVal.style.backgroundColor === "") {
-                elemVal.classList.add('disabled');
-            }
-            else {
-                return;
-            }
-        });
-        console.log(this.allButtons);
-    };
-    ContactUsComponent.prototype.ngOnInit = function () {
+    CustomersComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.clientService.fetchClients().subscribe(function (data) {
             _this.clientInfo = data;
         });
     };
-    ContactUsComponent.prototype.edit = function (clientID) {
+    CustomersComponent.prototype.edit = function (clientID) {
         var clientData = {
             queryParams: {
                 "ClientID": clientID,
@@ -732,15 +706,26 @@ var ContactUsComponent = /** @class */ (function () {
         };
         this.router.navigate(['edit-client'], clientData);
     };
-    ContactUsComponent = __decorate([
+    CustomersComponent.prototype.delete = function (clientID) {
+        this.clientService.deleteAppointment(clientID).subscribe(function (data) {
+            if (data.success) {
+                location.reload();
+            }
+            else {
+                console.log('something went wrong');
+            }
+        });
+    };
+    ;
+    CustomersComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-contact-us',
-            template: __webpack_require__(/*! ./contact-us.component.html */ "./src/app/pages/contact-us/contact-us.component.html"),
-            styles: [__webpack_require__(/*! ./contact-us.component.css */ "./src/app/pages/contact-us/contact-us.component.css")]
+            selector: 'customers',
+            template: __webpack_require__(/*! ./customers.component.html */ "./src/app/pages/customers/customers.component.html"),
+            styles: [__webpack_require__(/*! ./customers.component.css */ "./src/app/pages/customers/customers.component.css")]
         }),
         __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"], _service_client_service__WEBPACK_IMPORTED_MODULE_3__["ClientService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
-    ], ContactUsComponent);
-    return ContactUsComponent;
+    ], CustomersComponent);
+    return CustomersComponent;
 }());
 
 
@@ -796,7 +781,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-var EditClientComponent = /** @class */ (function () {
+var EditClientComponent = (function () {
     function EditClientComponent(route, router, clientService) {
         var _this = this;
         this.route = route;
@@ -899,8 +884,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/esm5/router.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/esm5/http.js");
 /* harmony import */ var _service_client_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../service/client.service */ "./src/app/service/client.service.ts");
-/* harmony import */ var _node_modules_moment_moment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../node_modules/moment/moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var _node_modules_moment_moment__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_node_modules_moment_moment__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_4__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -915,7 +900,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-var EmailContactsComponent = /** @class */ (function () {
+var EmailContactsComponent = (function () {
     function EmailContactsComponent(_http, router, clientService) {
         this._http = _http;
         this.router = router;
@@ -936,7 +921,7 @@ var EmailContactsComponent = /** @class */ (function () {
     };
     EmailContactsComponent.prototype.emailUser = function () {
         var _this = this;
-        var formattedDate = _node_modules_moment_moment__WEBPACK_IMPORTED_MODULE_4__(this.contactInfo.bookingDate).format('LLLL');
+        var formattedDate = moment__WEBPACK_IMPORTED_MODULE_4__(this.contactInfo.bookingDate).format('LLLL');
         var httpsHeaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]();
         httpsHeaders.set('Content-Type', 'application/x-www-form-urlencoded');
         this.data_ = {
@@ -1024,7 +1009,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var ErrorPageComponent = /** @class */ (function () {
+var ErrorPageComponent = (function () {
     function ErrorPageComponent() {
     }
     ErrorPageComponent.prototype.ngOnInit = function () {
@@ -1087,7 +1072,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var FooterComponent = /** @class */ (function () {
+var FooterComponent = (function () {
     function FooterComponent() {
     }
     FooterComponent.prototype.ngOnInit = function () {
@@ -1125,7 +1110,7 @@ module.exports = "h1 {\r\n    color: #ff0000;\r\n    text-align: center;\r\n  }\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-sm bg-dark navbar-dark justify-content-center\">\n  <a class=\"navbar-brand\" href=\"#\"><img src=\"../../../assets/img/hair-48.png\" alt=\"logo\" style=\"width:40px;\">\n  </a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapsibleNavbar\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n  <div *ngIf=\"validated\" class=\"collapse navbar-collapse\" id=\"collapsibleNavbar\">\n    <ul class=\"navbar-nav w-100 justify-content-center\">\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"/home\">About</a>\n      </li>\n      <!-- <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"/services\">Services</a>\n      </li> -->\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"/contact\">Book an Appointment</a>\n      </li>\n      <li class=\"nav-item\">\n          <a class=\"nav-link\" href=\"/customers\">View Appointments</a>\n        </li>\n    </ul>\n  </div>\n  <div *ngIf=\"!validated\" class=\"collapse navbar-collapse\" id=\"collapsibleNavbar\">\n    <ul class=\"navbar-nav w-100 justify-content-center\">\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"/home\">About</a>\n      </li>\n      <!-- <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"/services\">Services</a>\n      </li> -->\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"/contact\">Book an Appointment</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"/login\">Login</a>\n      </li>\n    </ul>\n  </div>\n</nav>\n\n\n\n\n\n\n\n"
+module.exports = "<nav class=\"navbar navbar-expand-sm bg-dark navbar-dark justify-content-center\">\n  <a class=\"navbar-brand\" href=\"#\"><img src=\"../../../assets/img/hair-48.png\" alt=\"logo\" style=\"width:40px;\">\n  </a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapsibleNavbar\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n  <div *ngIf=\"validated\" class=\"collapse navbar-collapse\" id=\"collapsibleNavbar\">\n    <ul class=\"navbar-nav w-100 justify-content-center\">\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"/home\">About</a>\n      </li>\n      <!-- <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"/services\">Services</a>\n      </li> -->\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"/contact\">Book an Appointment</a>\n      </li>\n      <li class=\"nav-item\">\n          <a class=\"nav-link\" href=\"/customers\">View Appointments</a>\n        </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" (click)=\"logout()\" href=\"/home\">Logout</a>\n      </li>\n    </ul>\n  </div>\n  <div *ngIf=\"!validated\" class=\"collapse navbar-collapse\" id=\"collapsibleNavbar\">\n    <ul class=\"navbar-nav w-100 justify-content-center\">\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"/home\">About</a>\n      </li>\n      <!-- <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"/services\">Services</a>\n      </li> -->\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"/contact\">Book an Appointment</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"/login\">Login</a>\n      </li>\n    </ul>\n  </div>\n</nav>\n\n\n\n\n\n\n\n"
 
 /***/ }),
 
@@ -1141,6 +1126,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HeaderComponent", function() { return HeaderComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var _service_client_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../service/client.service */ "./src/app/service/client.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1152,14 +1138,18 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
-var HeaderComponent = /** @class */ (function () {
-    function HeaderComponent(route, router) {
+
+var HeaderComponent = (function () {
+    function HeaderComponent(route, clientService) {
         this.route = route;
-        this.router = router;
+        this.clientService = clientService;
     }
     HeaderComponent.prototype.ngOnInit = function () {
-        this.validated = JSON.parse(this.route.snapshot.paramMap.get('valid'));
+        this.validated = this.clientService.validateUser();
         console.log(JSON.stringify(this.validated));
+    };
+    HeaderComponent.prototype.logout = function () {
+        this.clientService.logoutUser();
     };
     HeaderComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1167,7 +1157,7 @@ var HeaderComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./header.component.html */ "./src/app/pages/header/header.component.html"),
             styles: [__webpack_require__(/*! ./header.component.css */ "./src/app/pages/header/header.component.css")]
         }),
-        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"], _service_client_service__WEBPACK_IMPORTED_MODULE_2__["ClientService"]])
     ], HeaderComponent);
     return HeaderComponent;
 }());
@@ -1219,7 +1209,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var ImageLoaderComponent = /** @class */ (function () {
+var ImageLoaderComponent = (function () {
     function ImageLoaderComponent() {
     }
     ImageLoaderComponent.prototype.ngOnInit = function () {
@@ -1288,7 +1278,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-var LoginAppComponent = /** @class */ (function () {
+var LoginAppComponent = (function () {
     function LoginAppComponent(_http, router, clientService) {
         this._http = _http;
         this.router = router;
@@ -1314,7 +1304,7 @@ var LoginAppComponent = /** @class */ (function () {
             if (data.body.token) {
                 _this.clientService.storeUserData(data.body.token);
                 console.log("successfully sent email");
-                _this.router.navigate(['home', { "valid": data.body.success }]);
+                _this.router.navigate(['home']);
             }
             else {
                 _this.showAlert = data.body.success;
@@ -1338,6 +1328,69 @@ var LoginAppComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _service_client_service__WEBPACK_IMPORTED_MODULE_3__["ClientService"]])
     ], LoginAppComponent);
     return LoginAppComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/pages/logout/logout.component.css":
+/*!***************************************************!*\
+  !*** ./src/app/pages/logout/logout.component.css ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/pages/logout/logout.component.html":
+/*!****************************************************!*\
+  !*** ./src/app/pages/logout/logout.component.html ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  logout works!\n</p>\n"
+
+/***/ }),
+
+/***/ "./src/app/pages/logout/logout.component.ts":
+/*!**************************************************!*\
+  !*** ./src/app/pages/logout/logout.component.ts ***!
+  \**************************************************/
+/*! exports provided: LogoutComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LogoutComponent", function() { return LogoutComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/esm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var LogoutComponent = (function () {
+    function LogoutComponent() {
+    }
+    LogoutComponent.prototype.ngOnInit = function () {
+    };
+    LogoutComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-logout',
+            template: __webpack_require__(/*! ./logout.component.html */ "./src/app/pages/logout/logout.component.html"),
+            styles: [__webpack_require__(/*! ./logout.component.css */ "./src/app/pages/logout/logout.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], LogoutComponent);
+    return LogoutComponent;
 }());
 
 
@@ -1393,7 +1446,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-var RegisterComponent = /** @class */ (function () {
+var RegisterComponent = (function () {
     function RegisterComponent(_http, router, clientService) {
         this._http = _http;
         this.router = router;
@@ -1452,7 +1505,7 @@ var RegisterComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".mani-section {\r\n    padding: 90px;\r\n    background-color: #ffffff;\r\n}\r\n\r\n@media only screen and (max-width:375px){\r\n    .section{\r\n       padding: 0px; \r\n    }\r\n}\r\n\r\n@media only screen and (max-width:414px){\r\n    .section{\r\n       padding: 0px; \r\n    }\r\n}\r\n\r\n.details{\r\n    padding-left: 300px;\r\n}"
+module.exports = ".mani-section {\r\n    padding: 90px;\r\n    background-color: #ffffff;\r\n}\r\n\r\n@media only screen and (max-width:375px){\r\n    .section{\r\n       padding: 0px; \r\n    }\r\n}\r\n\r\n@media only screen and (max-width:414px){\r\n    .section{\r\n       padding: 0px; \r\n    }\r\n}\r\n\r\n/*\r\n.details{\r\n    padding-left: 300px;\r\n}*/\r\n"
 
 /***/ }),
 
@@ -1490,7 +1543,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
-var SuccessComponent = /** @class */ (function () {
+var SuccessComponent = (function () {
     function SuccessComponent(route, router) {
         this.route = route;
         this.router = router;
@@ -1531,6 +1584,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/esm5/http.js");
 /* harmony import */ var rxjs_add_operator_map__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/add/operator/map */ "./node_modules/rxjs/_esm5/add/operator/map.js");
+/* harmony import */ var angular2_jwt__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! angular2-jwt */ "./node_modules/angular2-jwt/angular2-jwt.js");
+/* harmony import */ var angular2_jwt__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(angular2_jwt__WEBPACK_IMPORTED_MODULE_3__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1543,7 +1598,8 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-var ClientService = /** @class */ (function () {
+
+var ClientService = (function () {
     function ClientService(_http) {
         this._http = _http;
     }
@@ -1557,20 +1613,20 @@ var ClientService = /** @class */ (function () {
     ClientService.prototype.editAppointment = function (id, data, options) {
         return this._http.put("/client/" + id, data, options);
     };
-    ClientService.prototype.deleteAppointment = function (data, options) {
-        return this._http.post("/client/save", data, options);
+    ClientService.prototype.deleteAppointment = function (id) {
+        return this._http.delete("/client/" + id);
     };
     ClientService.prototype.saveClient = function (data, options) {
-        return this._http.post("/client/save", data, options);
+        return this._http.post("http://localhost:5000/client/save", data, options);
     };
     ClientService.prototype.sendClientData = function (data, options) {
-        return this._http.post("/client/sendmail", data, options);
+        return this._http.post("http://localhost:5000/client/sendmail", data, options);
     };
     ClientService.prototype.registerBarber = function (data, options) {
-        return this._http.post("/client/register", data, options);
+        return this._http.post("http://localhost:5000/user/register", data, options);
     };
     ClientService.prototype.login = function (data, options) {
-        return this._http.post("/client/authenticate", data, options);
+        return this._http.post("http://localhost:5000/user/authenticate", data, options);
     };
     ClientService.prototype.getClientDetails = function (id) {
         return this._http.get("/client" + id);
@@ -1581,6 +1637,12 @@ var ClientService = /** @class */ (function () {
     ClientService.prototype.loadToken = function () {
         var token = localStorage.getItem('id_token');
         this.authToken = token;
+    };
+    ClientService.prototype.validateUser = function () {
+        return Object(angular2_jwt__WEBPACK_IMPORTED_MODULE_3__["tokenNotExpired"])('jwt_token');
+    };
+    ClientService.prototype.logoutUser = function () {
+        localStorage.clear();
     };
     ClientService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
@@ -1655,17 +1717,6 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 
 module.exports = __webpack_require__(/*! C:\Projects\angular projects-frontend\geecutsapp\src\main.ts */"./src/main.ts");
 
-
-/***/ }),
-
-/***/ 1:
-/*!**********************!*\
-  !*** xhr2 (ignored) ***!
-  \**********************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/* (ignored) */
 
 /***/ })
 
