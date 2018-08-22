@@ -5,13 +5,14 @@ const cors = require('cors');
 const passport = require('passport');
 const mongoose = require('mongoose');
 const config = require('./config/database');
-
+const stripe = require("stripe");
 
 
 // Connect To Database (OLD CODE)
 mongoose.connect(config.database, { useMongoClient: true});
 // On Connection
 mongoose.connection.on('connected', () => {
+  //mongoose.connection.db.dropDatabase();
   console.log('Connected to Database '+config.database);
 });
 // On Error
@@ -24,7 +25,7 @@ const app = express();
 const users = require('./routes/users');
 
 // Port Number
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 5000;
 
 // CORS Middleware
 app.use(cors());

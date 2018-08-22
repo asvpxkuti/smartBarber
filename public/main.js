@@ -321,6 +321,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_login_app_login_app_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../pages/login-app/login-app.component */ "./src/app/pages/login-app/login-app.component.ts");
 /* harmony import */ var _pages_register_register_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../pages/register/register.component */ "./src/app/pages/register/register.component.ts");
 /* harmony import */ var _pages_error_page_error_page_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../pages/error-page/error-page.component */ "./src/app/pages/error-page/error-page.component.ts");
+/* harmony import */ var _pages_pay_pay_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../pages/pay/pay.component */ "./src/app/pages/pay/pay.component.ts");
+
 
 
 
@@ -337,8 +339,9 @@ var routes = [
     { path: 'success', component: _pages_success_success_component__WEBPACK_IMPORTED_MODULE_3__["SuccessComponent"] },
     { path: 'edit-client', component: _pages_edit_client_edit_client_component__WEBPACK_IMPORTED_MODULE_4__["EditClientComponent"] },
     { path: 'dashboard', component: _pages_login_app_login_app_component__WEBPACK_IMPORTED_MODULE_5__["LoginAppComponent"] },
-    { path: 'create', component: _pages_register_register_component__WEBPACK_IMPORTED_MODULE_6__["RegisterComponent"] },
-    { path: 'error', component: _pages_error_page_error_page_component__WEBPACK_IMPORTED_MODULE_7__["ErrorPageComponent"] }
+    { path: 'register', component: _pages_register_register_component__WEBPACK_IMPORTED_MODULE_6__["RegisterComponent"] },
+    { path: 'error', component: _pages_error_page_error_page_component__WEBPACK_IMPORTED_MODULE_7__["ErrorPageComponent"] },
+    { path: 'pay', component: _pages_pay_pay_component__WEBPACK_IMPORTED_MODULE_8__["PayComponent"] }
 ];
 
 
@@ -439,12 +442,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ng_http_loader_ng_http_loader_module__WEBPACK_IMPORTED_MODULE_23___default = /*#__PURE__*/__webpack_require__.n(ng_http_loader_ng_http_loader_module__WEBPACK_IMPORTED_MODULE_23__);
 /* harmony import */ var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ngx-cookie-service */ "./node_modules/ngx-cookie-service/index.js");
 /* harmony import */ var _pages_logout_logout_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./pages/logout/logout.component */ "./src/app/pages/logout/logout.component.ts");
+/* harmony import */ var _pages_pay_pay_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./pages/pay/pay.component */ "./src/app/pages/pay/pay.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -490,7 +495,8 @@ var AppModule = (function () {
                 _pages_login_app_login_app_component__WEBPACK_IMPORTED_MODULE_19__["LoginAppComponent"],
                 _pages_register_register_component__WEBPACK_IMPORTED_MODULE_20__["RegisterComponent"],
                 _pages_error_page_error_page_component__WEBPACK_IMPORTED_MODULE_22__["ErrorPageComponent"],
-                _pages_logout_logout_component__WEBPACK_IMPORTED_MODULE_25__["LogoutComponent"]
+                _pages_logout_logout_component__WEBPACK_IMPORTED_MODULE_25__["LogoutComponent"],
+                _pages_pay_pay_component__WEBPACK_IMPORTED_MODULE_26__["PayComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -645,7 +651,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-header></app-header>\n<section class=\"mani-section\">\n        <h2 class=\"text-center\">Current Appointments</h2> \n        <div class=\"table-responsive\">\n          <table class=\"table table-striped\">\n            <thead>\n              <tr>\n                <th>No.</th>\n                <th>Customer</th>\n                <th>Customer Email</th>\n                <th>Day of Appt.</th>\n                <th>Date Submitted</th>\n                <th>Edit</th>\n                <th>Cancel Appt.</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr *ngFor=\"let data of clientInfo; let i = index\">\n                <td>{{i + 1}}</td>\n                <td>{{data.name}}</td>\n                <td>{{data.email}}</td>\n                <td>{{data.date}}</td>\n                <td>{{data.submitted_date | amDateFormat:'MMMM Do YYYY, h:mm:ss a'}}</td>\n                <td><button type=\"button\" class=\"btn btn-success\" (click)=\"edit(data._id)\">Update</button></td>\n                <td><button type=\"button\" class=\"btn btn-danger\" (click)=\"delete(data._id)\">Delete</button></td>\n              </tr>\n            </tbody>\n          </table>\n        </div>\n</section>\n\n\n\n\n"
+module.exports = "<app-header></app-header>\n<section class=\"mani-section\">\n        <h2 class=\"text-center\">Current Appointments</h2> \n        <div class=\"table-responsive\">\n          <table class=\"table table-striped\">\n            <thead>\n              <tr>\n                <th>No.</th>\n                <th>Customer</th>\n                <th>Customer Email</th>\n                <th>Day of Appointment</th>\n                <th>Appointment For</th>\n                <th>Edit</th>\n                <th>Cancel Appointment</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr *ngFor=\"let data of clientInfo; let i = index\">\n                <td>{{i + 1}}</td>\n                <td>{{data.name}}</td>\n                <td>{{data.email}}</td>\n                <td>{{data.date | amDateFormat:'MMMM Do YYYY, h:mm:ss a'}}</td>\n                <td>{{data.submitted_date | amDateFormat:'MMMM Do YYYY, h:mm:ss a'}}</td>\n                <td><button type=\"button\" class=\"btn btn-success\" (click)=\"edit(data._id)\">Update</button></td>\n                <td><button type=\"button\" class=\"btn btn-danger\" (click)=\"delete(data._id)\">Delete</button></td>\n              </tr>\n            </tbody>\n          </table>\n        </div>\n</section>\n\n\n\n\n"
 
 /***/ }),
 
@@ -750,7 +756,7 @@ module.exports = ".mani-section {\r\n    padding: 50px;\r\n    background-color:
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"mani-section\">\n  <h1>Please Update Your Appointment</h1>\n    <div class=\"container-fluid\">\n        <form  (keydown.enter)=\"disableEnterKey($event)\" #editForm=\"ngForm\" novalidate>\n          <div class=\"row\">\n            <div class=\"col-md-3\">\n              <div class=\"form-group\">\n                  <!-- <h3 class=\"text-center\">Pick a day</h3> -->\n                  <label for=\"date-mani\">Date:</label>\n                  <input class=\"form-control\" [(ngModel)]=\"contactInfo.bookingDate\" [owlDateTimeTrigger]=\"dt\" [owlDateTime]=\"dt\" id=\"mydate\" name=\"mydate\" size=\"30\">\n                  <owl-date-time #dt></owl-date-time>\n              </div>\n              <div class=\"form-group\">\n                  <label for=\"name\">Name:</label>\n                  <input class=\"form-control\" appUpdateOnblur  #name_=\"ngModel\"  id=\"name\" [(ngModel)]=\"contactInfo.name\" placeholder=\"Enter your name\" name=\"name_\" size=\"30\" required minlength=\"2\" >\n                  <div class=\"alert alert-danger\" *ngIf=\"name_.errors?.required && name_.touched\">\n                    Name is required.\n                  </div>\n                  <div class=\"alert alert-danger\" *ngIf=\"name_.errors?.minlength && name_.touched\">\n                    Name must be at least 2 characters long.\n                  </div>\n              </div>\n            </div> <!-- end-of-first-col -->\n            <div class=\"col-md-3\">\n              <!-- <h3 class=\"text-center\">Pick a service</h3> -->\n              <div class=\"form-group\">\n                  <label for=\"name\">I Need A:</label>\n                  <select placeholder=\"Pick Something\" name=\"job\" class=\"form-control\" id=\"job\" #job=\"ngModel\" [(ngModel)]='contactInfo.job'>\n                    <option *ngFor=\"let data of hairStore\" [ngValue]=\"data.price\"> {{data.hairjob}}</option>\n                  </select>\n                  <div class=\"alert alert-danger\" *ngIf=\"job.errors?.required && job.touched\">\n                    This field is required.\n                  </div>\n              </div>\n              <div class=\"form-group\">\n                  <label for=\"email\">Email:</label>\n                  <input class=\"form-control\" #email=\"ngModel\" [(ngModel)]=\"contactInfo.email\" id=\"email\" ng-pattern=\"/^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$/\" placeholder=\"Enter email\" name=\"email\" size=\"30\" required appUpdateOnblur>\n                  <div class=\"alert alert-danger\" *ngIf=\"email.errors?.required && email.touched\">\n                    Email is required.\n                  </div>\n                  <div class=\"alert alert-danger\" *ngIf=\"email.errors?.pattern && email.touched\">\n                    Please enter a valid email\n                  </div>\n              </div>\n              <button [disabled]=\"editForm.invalid\" (click)=updateClient() type=\"submit\" class=\"btn btn-primary btn-lg btn-block\">Send</button>\n            </div>\n          </div> <!-- end-of-first-row -->\n          \n        </form>\n    </div>\n</section>"
+module.exports = "<section class=\"mani-section\">\n  <h1>Please Update Your Appointment</h1>\n    <div class=\"container-fluid\">\n        <form  (keydown.enter)=\"disableEnterKey($event)\" #editForm=\"ngForm\" novalidate>\n          <div class=\"row\">\n            <div class=\"col-md-3\">\n              <div class=\"form-group\">\n                  <!-- <h3 class=\"text-center\">Pick a day</h3> -->\n                  <label for=\"mydate\">Date:</label>\n                  <input class=\"form-control\" [(ngModel)]=\"contactInfo.bookingDate\" [owlDateTimeTrigger]=\"dt\" [owlDateTime]=\"dt\" id=\"mydate\" name=\"mydate\" size=\"30\">\n                  <owl-date-time #dt></owl-date-time>\n              </div>\n              <div class=\"form-group\">\n                  <label for=\"name\">Name:</label>\n                  <input class=\"form-control\" appUpdateOnblur  #name_=\"ngModel\"  id=\"name\" [(ngModel)]=\"contactInfo.name\" placeholder=\"Enter your name\" name=\"name_\" size=\"30\" required minlength=\"2\" >\n                  <div class=\"alert alert-danger\" *ngIf=\"name_.errors?.required && name_.touched\">\n                    Name is required.\n                  </div>\n                  <div class=\"alert alert-danger\" *ngIf=\"name_.errors?.minlength && name_.touched\">\n                    Name must be at least 2 characters long.\n                  </div>\n              </div>\n            </div> <!-- end-of-first-col -->\n            <div class=\"col-md-3\">\n              <!-- <h3 class=\"text-center\">Pick a service</h3> -->\n              <div class=\"form-group\">\n                  <label for=\"name\">I Need A:</label>\n                  <select placeholder=\"Pick Something\" name=\"job\" class=\"form-control\" id=\"job\" #job=\"ngModel\" [(ngModel)]='contactInfo.job'>\n                    <option *ngFor=\"let data of hairStore\" [ngValue]=\"data.price\"> {{data.hairjob}}</option>\n                  </select>\n                  <div class=\"alert alert-danger\" *ngIf=\"job.errors?.required && job.touched\">\n                    This field is required.\n                  </div>\n              </div>\n              <div class=\"form-group\">\n                  <label for=\"email\">Email:</label>\n                  <input type=\"email\" class=\"form-control\" #email=\"ngModel\" [(ngModel)]=\"contactInfo.email\" id=\"email\" placeholder=\"Enter email\" name=\"email\" size=\"30\" required appUpdateOnblur>\n                  <div class=\"alert alert-danger\" *ngIf=\"email.errors?.required && email.touched\">\n                    Email is required.\n                  </div>\n                  <div class=\"alert alert-danger\" *ngIf=\"email.errors?.pattern && email.touched\">\n                    Please enter a valid email\n                  </div>\n              </div>\n              <button [disabled]=\"editForm.invalid\" (click)=updateClient() type=\"submit\" class=\"btn btn-primary btn-lg btn-block\">Send</button>\n            </div>\n          </div> <!-- end-of-first-row -->\n          \n        </form>\n    </div>\n</section>\n"
 
 /***/ }),
 
@@ -787,6 +793,7 @@ var EditClientComponent = (function () {
         this.route = route;
         this.router = router;
         this.clientService = clientService;
+        this.emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         this.contactInfo = {
             email: '',
             name: '',
@@ -816,9 +823,9 @@ var EditClientComponent = (function () {
         httpsHeaders.set('Content-Type', 'application/x-www-form-urlencoded');
         this.clientService.editAppointment(this.customerID, this.contactInfo, { headers: httpsHeaders, observe: 'response' }).subscribe(function (data) {
             console.log('updating data:' + data);
-            if (data) {
-                console.log("successfully sent email");
-                _this.router.navigate(['success']);
+            if (data.ok) {
+                //console.log("successfully sent email");
+                _this.router.navigate(['customers']);
             }
             else {
                 console.log("opps something went wrong");
@@ -855,7 +862,7 @@ var EditClientComponent = (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".mani-section {\r\n    padding: 50px;\r\n    background-color: #ffffff;\r\n}\r\n\r\n.header-section {\r\npadding: 50px;\r\nbackground-color: #ffffff;\r\nfont-family: Georgia, serif;\r\n}\r\n\r\n.list-service{\r\n    list-style-type: none;\r\n    margin: 0;\r\n    padding: 0;\r\n    overflow: hidden;\r\n}\r\n\r\n.list {\r\n  display: block;\r\n  float:left;\r\n  text-align: center;\r\n  padding: 16px;\r\n}\r\n\r\n@media only screen and (max-width:375px){\r\n  .mani-section,{\r\n     padding: 0px; \r\n  }\r\n  .header-section{\r\n    padding: 0px; \r\n    text-align: none;\r\n }\r\n h1 {\r\n  font-size: 30px;\r\n}\r\n\r\n.list-service{\r\n  list-style-type: none;\r\n  margin: 0;\r\n  padding: 0;\r\n  overflow: hidden;\r\n}\r\n\r\n.list {\r\ndisplay: block;\r\nfloat:left;\r\nclear:left;\r\ntext-align: center;\r\npadding: 6px;\r\n}\r\n  \r\n}\r\n\r\n@media only screen and (max-width:414px){\r\n  .mani-section{\r\n     padding: 0px; \r\n  }\r\n  .header-section{\r\n    padding: 0px; \r\n    text-align: none;\r\n }  \r\n .list {\r\n  display: block;\r\n  float:left;\r\n  clear:left;\r\n  text-align: center;\r\n  padding: 6px;\r\n  }\r\n}"
+module.exports = ".mani-section{\r\n    padding: 50px;\r\n    background-color: #ffffff;\r\n}\r\n\r\n.pay-section{\r\n  padding: 50px;\r\n}\r\n\r\n.header-section {\r\npadding-top: 50px;\r\n  padding-left: 50px;\r\nbackground-color: #ffffff;\r\nfont-family: Georgia, serif;\r\n}\r\n\r\n.list-service{\r\n    list-style-type: none;\r\n    margin: 0;\r\n    padding: 0;\r\n    overflow: hidden;\r\n}\r\n\r\n.list {\r\n  display: block;\r\n  float:left;\r\n  text-align: center;\r\n  padding: 16px;\r\n}\r\n\r\n@media only screen and (max-width:375px){\r\n  .mani-section,{\r\n     padding: 0px; \r\n  }\r\n  .header-section{\r\n    padding: 0px; \r\n    text-align: none;\r\n }\r\n h1 {\r\n  font-size: 30px;\r\n}\r\n\r\n.list-service{\r\n  list-style-type: none;\r\n  margin: 0;\r\n  padding: 0;\r\n  overflow: hidden;\r\n}\r\n\r\n.list {\r\ndisplay: block;\r\nfloat:left;\r\nclear:left;\r\ntext-align: center;\r\npadding: 6px;\r\n}\r\n  \r\n}\r\n\r\n@media only screen and (max-width:414px){\r\n  .mani-section{\r\n     padding: 0px; \r\n  }\r\n  .header-section{\r\n    padding: 0px; \r\n    text-align: none;\r\n }  \r\n .list {\r\n  display: block;\r\n  float:left;\r\n  clear:left;\r\n  text-align: center;\r\n  padding: 6px;\r\n  }\r\n}\r\n"
 
 /***/ }),
 
@@ -866,7 +873,7 @@ module.exports = ".mani-section {\r\n    padding: 50px;\r\n    background-color:
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"header-section\">\n    <div class=\"container-fluid\">\n          <ul class=\"list-service\">\n              <li class=\"list\">1. Pick a day</li>\n              <li class=\"list\">2. Pick a service</li>\n              <li class=\"list\">3. Click send and your done</li>\n          </ul>\n    </div>  \n</section>\n\n<section class=\"mani-section\">\n    <div class=\"container-fluid\">\n        <form  (keydown.enter)=\"disableEnterKey($event)\" #personalForm=\"ngForm\" novalidate>\n          <div class=\"row\">\n            <div class=\"col-md-3\">\n              <div class=\"form-group\">\n                  <!-- <h3 class=\"text-center\">Pick a day</h3> -->\n                  <label for=\"date-mani\">Date:</label>\n                  <input class=\"form-control\" #mydate=\"ngModel\" appUpdateOnblur [(ngModel)]=\"contactInfo.bookingDate\" [owlDateTimeTrigger]=\"dt\" [owlDateTime]=\"dt\" id=\"mydate\" name=\"mydate\" size=\"30\" required>\n                  <div class=\"alert alert-warning\" *ngIf=\"mydate.errors?.required && mydate.touched\">\n                      Date is required.\n                    </div>\n                  <owl-date-time [hour12Timer]=\"true\" #dt></owl-date-time>\n              </div>\n              <div class=\"form-group\">\n                  <label for=\"name\">Name:</label>\n                  <input class=\"form-control\" appUpdateOnblur  #name_=\"ngModel\"  id=\"name\" [(ngModel)]=\"contactInfo.name\" placeholder=\"Enter your name\" name=\"name_\" size=\"30\" required minlength=\"2\" >\n                  <div class=\"alert alert-warning\" *ngIf=\"name_.errors?.required && name_.touched\">\n                    Name is required.\n                  </div>\n                  <div class=\"alert alert-warning\" *ngIf=\"name_.errors?.minlength && name_.touched\">\n                    Name must be at least 2 characters long.\n                  </div>\n              </div>\n            </div> <!-- end-of-first-col -->\n            <div class=\"col-md-3\">\n              <!-- <h3 class=\"text-center\">Pick a service</h3> -->\n              <div class=\"form-group\">\n                  <label for=\"name\">I Need A:</label>\n                  <select placeholder=\"Pick Something\" appUpdateOnblur name=\"job\" class=\"form-control\" id=\"job\" #job=\"ngModel\" [(ngModel)]='contactInfo.job' required>\n                    <option *ngFor=\"let data of hairStore\" [ngValue]=\"data.price\"> {{data.hairjob}}</option>\n                  </select>\n                  <div class=\"alert alert-warning\" *ngIf=\"job.errors?.required && job.touched\">\n                    This field is required.\n                  </div>\n              </div>\n              <div class=\"form-group\">\n                  <label for=\"email\">Email:</label>\n                  <input class=\"form-control\" #email=\"ngModel\" [(ngModel)]=\"contactInfo.email\" id=\"email\" ng-pattern=\"/^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$/\" placeholder=\"Enter email\" name=\"email\" size=\"30\" required appUpdateOnblur>\n                  <div class=\"alert alert-warning\" *ngIf=\"email.errors?.required && email.touched\">\n                    Email is required.\n                  </div>\n                  <div class=\"alert alert-warning\" *ngIf=\"email.errors?.pattern && email.touched\">\n                    Please enter a valid email\n                  </div>\n              </div>\n              <button [disabled]=\"personalForm.invalid\" (click)=emailUser() type=\"submit\" class=\"btn btn-primary btn-lg btn-block\">Send</button>\n            </div>\n            <div class=\"col-md-6\">\n              <div class=\"form-group\">\n                  <p></p>\n                  <p>Your Name is: {{contactInfo.name}}</p>\n                  <p>Your Email is: {{contactInfo.email}}<p>\n                  <p>Your Appointment is on: {{contactInfo.bookingDate | amDateFormat:'MMMM Do YYYY, h:mm:ss a' }}</p>\n                  <p>Your Total Cost is: {{contactInfo.job}}</p>\n              </div>\n            </div>\n          </div> <!-- end-of-first-row -->\n          \n        </form>\n    </div>\n</section>\n \n\n\n\n\n\n  \n  "
+module.exports = "<section class=\"header-section\">\n    <div class=\"container-fluid\">\n          <ul class=\"list-service\">\n              <li class=\"list\">1. Pick a day</li>\n              <li class=\"list\">2. Pick a service</li>\n              <li class=\"list\">3. Click send and your done</li>\n          </ul>\n    </div>  \n</section>\n\n<section class=\"mani-section\">\n    <div class=\"container-fluid\">\n        <form  (keydown.enter)=\"disableEnterKey($event)\" #personalForm=\"ngForm\" novalidate>\n          <div class=\"row\">\n            <div class=\"col-md-3\">\n              <div class=\"form-group\">\n                  <label for=\"mydate\">Date:</label>\n                  <input class=\"form-control\" #mydate=\"ngModel\" appUpdateOnblur [(ngModel)]=\"contactInfo.bookingDate\" [owlDateTimeTrigger]=\"dt\" [owlDateTime]=\"dt\" id=\"mydate\" name=\"mydate\" size=\"30\" required>\n                  <div class=\"alert alert-warning\" *ngIf=\"mydate.errors?.required && mydate.touched\">\n                      Date is required.\n                    </div>\n                  <owl-date-time [hour12Timer]=\"true\" #dt></owl-date-time>\n              </div>\n              <div class=\"form-group\">\n                  <label for=\"name\">Name:</label>\n                  <input class=\"form-control\" appUpdateOnblur  #name_=\"ngModel\"  id=\"name\" [(ngModel)]=\"contactInfo.name\" placeholder=\"Enter your name\" name=\"name_\" (keypress)=\"disableShiftKey($event)\" size=\"30\" required minlength=\"2\" [pattern]=\"namePattern\" >\n                  <div class=\"alert alert-warning\" *ngIf=\"name_.errors?.required && name_.touched\">\n                    Name is required.\n                  </div>\n                  <div class=\"alert alert-warning\" *ngIf=\"name_.errors?.minlength && name_.touched\">\n                    Name must be at least 2 characters long.\n                  </div>\n              </div>\n            </div> <!-- end-of-first-col -->\n            <div class=\"col-md-3\">\n              <!-- <h3 class=\"text-center\">Pick a service</h3> -->\n              <div class=\"form-group\">\n                  <label for=\"name\">I Need A:</label>\n                  <select  appUpdateOnblur name=\"job\" class=\"form-control\" id=\"job\" #job=\"ngModel\" [(ngModel)]=\"contactInfo.job\" required>\n                    <option *ngFor=\"let data of hairStore\" [ngValue]=\"data.price\"> {{data.hairjob}}</option>\n                  </select>\n                  <div class=\"alert alert-warning\" *ngIf=\"job.errors?.required && job.touched\">\n                    This field is required.\n                  </div>\n              </div>\n              <div class=\"form-group\">\n                  <label for=\"email\">Email:</label>\n                  <input class=\"form-control\" #email=\"ngModel\" [(ngModel)]=\"contactInfo.email\" id=\"email\" [pattern]=\"emailPattern\" placeholder=\"Enter email\" name=\"email\" size=\"30\" required appUpdateOnblur>\n                  <div class=\"alert alert-warning\" *ngIf=\"email.errors?.required && email.touched\">\n                    Email is required.\n                  </div>\n                  <div class=\"alert alert-warning\" *ngIf=\"email.errors?.pattern && email.touched\">\n                    Please enter a valid email\n                  </div>\n              </div>\n              <button [disabled]=\"personalForm.invalid\" (click)=emailUser() type=\"submit\" class=\"btn btn-primary btn-lg btn-block\">Book</button>\n            </div>\n            <div class=\"col-md-6\">\n              <div class=\"form-group\">\n                  <p></p>\n                  <p>Your Name is: {{contactInfo.name}}</p>\n                  <p>Your Email is: {{contactInfo.email}}<p>\n                  <p>Your Appointment is on: {{contactInfo.bookingDate | amDateFormat:'MMMM Do YYYY, h:mm:ss a' }}</p>\n                  <p>Your Total Cost is: {{contactInfo.job}}</p>\n              </div>\n            </div>\n          </div> <!-- end-of-first-row -->\n        </form>\n    </div>\n</section>\n<div class=\"pay-section\">\n  <div class=\"container-fluid\">\n      <a (click)=\"toggle()\" class=\"btn btn-warning btn-lg\">\n        <span *ngIf=\"!edit\">Pay here</span>\n        <span *ngIf=\"edit\">Pay in person</span>\n      </a>\n  </div>\n  <ng-container *ngIf='edit'><app-pay></app-pay></ng-container>\n</div>\n\n \n\n\n\n\n\n  \n"
 
 /***/ }),
 
@@ -884,8 +891,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/esm5/router.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/esm5/http.js");
 /* harmony import */ var _service_client_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../service/client.service */ "./src/app/service/client.service.ts");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_4__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -899,35 +904,37 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-
 var EmailContactsComponent = (function () {
     function EmailContactsComponent(_http, router, clientService) {
         this._http = _http;
         this.router = router;
         this.clientService = clientService;
+        this.emailPattern = "([a-zA-Z0-9]+)([\\_\\.\\-{1}])?([a-zA-Z0-9]+)\\@([a-zA-Z0-9]+)([\\.])([a-zA-Z\\.]+)";
+        this.namePattern = "^[a-zA-ZùûüÿàâæçéèêëïîôÙÛÜÀÂÆÇÉÈÊËÏÎÔ '-]+$";
+        this.edit = false;
+        this.hairStore = [
+            { 'hairjob': 'Hair Cut', 'price': 25 },
+            { 'hairjob': 'Line Up', 'price': 15 },
+            { 'hairjob': 'Beard Clean Up', 'price': 15 }
+        ];
         this.contactInfo = {
             email: '',
             name: '',
             bookingDate: null,
             job: ''
         };
-        this.hairStore = [
-            { 'hairjob': 'Hair Cut', 'price': 25 },
-            { 'hairjob': 'Line Up', 'price': 15 },
-            { 'hairjob': 'Beard Clean Up', 'price': 15 }
-        ];
     }
     EmailContactsComponent.prototype.ngOnInit = function () {
     };
     EmailContactsComponent.prototype.emailUser = function () {
         var _this = this;
-        var formattedDate = moment__WEBPACK_IMPORTED_MODULE_4__(this.contactInfo.bookingDate).format('LLLL');
+        //const formattedDate = moment(this.contactInfo.bookingDate).format('LLLL');
         var httpsHeaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]();
         httpsHeaders.set('Content-Type', 'application/x-www-form-urlencoded');
         this.data_ = {
             'name': this.contactInfo.name,
             'email': this.contactInfo.email,
-            'date': formattedDate,
+            'date': this.contactInfo.bookingDate,
             'job': this.contactInfo.job
         };
         this.clientData = JSON.stringify(this.data_);
@@ -950,6 +957,20 @@ var EmailContactsComponent = (function () {
             event.preventDefault();
             return false;
         }
+    };
+    EmailContactsComponent.prototype.disableShiftKey = function (e) {
+        if (e.shiftKey && e.which === 83) {
+            event.preventDefault();
+            alert('invalid entry');
+            return false;
+        }
+        else {
+            //alert('it works');
+            console.log('testing');
+        }
+    };
+    EmailContactsComponent.prototype.toggle = function () {
+        this.edit = !this.edit;
     };
     EmailContactsComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -984,7 +1005,7 @@ module.exports = ".mani-section {\r\n    padding: 90px;\r\n    background-color:
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"mani-section section text-center\">\n    <div class=\"container-fluid\">\n        <h1>Opps Something went wrong</h1>\n     </div>\n</section>\n\n\n"
+module.exports = "<section class=\"mani-section section text-center\">\n    <div class=\"container-fluid\">\n        <h1>Opps Something went wrong</h1>\n      <span><a href=\"/home\">Click here to return to home page</a></span>\n     </div>\n</section>\n\n\n"
 
 /***/ }),
 
@@ -1110,7 +1131,7 @@ module.exports = "h1 {\r\n    color: #ff0000;\r\n    text-align: center;\r\n  }\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-sm bg-dark navbar-dark justify-content-center\">\n  <a class=\"navbar-brand\" href=\"#\"><img src=\"../../../assets/img/hair-48.png\" alt=\"logo\" style=\"width:40px;\">\n  </a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapsibleNavbar\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n  <div *ngIf=\"validated\" class=\"collapse navbar-collapse\" id=\"collapsibleNavbar\">\n    <ul class=\"navbar-nav w-100 justify-content-center\">\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"/home\">About</a>\n      </li>\n      <!-- <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"/services\">Services</a>\n      </li> -->\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"/contact\">Book an Appointment</a>\n      </li>\n      <li class=\"nav-item\">\n          <a class=\"nav-link\" href=\"/customers\">View Appointments</a>\n        </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" (click)=\"logout()\" href=\"/home\">Logout</a>\n      </li>\n    </ul>\n  </div>\n  <div *ngIf=\"!validated\" class=\"collapse navbar-collapse\" id=\"collapsibleNavbar\">\n    <ul class=\"navbar-nav w-100 justify-content-center\">\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"/home\">About</a>\n      </li>\n      <!-- <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"/services\">Services</a>\n      </li> -->\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"/contact\">Book an Appointment</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"/login\">Login</a>\n      </li>\n    </ul>\n  </div>\n</nav>\n\n\n\n\n\n\n\n"
+module.exports = "<nav class=\"navbar navbar-expand-sm bg-dark navbar-dark justify-content-center\">\n  <a class=\"navbar-brand\" href=\"/home\"><img src=\"../../../assets/img/hair-48.png\" alt=\"logo\" style=\"width:40px;\">\n  </a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapsibleNavbar\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n  <div *ngIf=\"validated\" class=\"collapse navbar-collapse\" id=\"collapsibleNavbar\">\n    <ul class=\"navbar-nav w-100 justify-content-center\">\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"/home\">About</a>\n      </li>\n      <!-- <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"/services\">Services</a>\n      </li> -->\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"/contact\">Book an Appointment</a>\n      </li>\n      <li class=\"nav-item\">\n          <a class=\"nav-link\" href=\"/customers\">View Appointments</a>\n        </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" (click)=\"logout()\" href=\"/home\">Logout</a>\n      </li>\n    </ul>\n  </div>\n  <div *ngIf=\"!validated\" class=\"collapse navbar-collapse\" id=\"collapsibleNavbar\">\n    <ul class=\"navbar-nav w-100 justify-content-center\">\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"/home\">About</a>\n      </li>\n      <!-- <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"/services\">Services</a>\n      </li> -->\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"/contact\">Book an Appointment</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"/login\">Login</a>\n      </li>\n    </ul>\n  </div>\n</nav>\n\n\n\n\n\n\n\n"
 
 /***/ }),
 
@@ -1247,7 +1268,7 @@ module.exports = ".mani-section {\r\n    padding: 50px;\r\n    background-color:
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"mani-section\">\n  <div class=\"row justify-content-around\">\n    <div class=\"col-md-5 login-customer text-center\">\n      <a href=\"/home\"><img class=\"img-fluid\"  src=\"../../../assets/img/customers.png\" alt=\"customers\"><p class=\"oblique\">Customers click here</p></a>    \n    </div>\n    <p></p>\n    <div class=\"col-md-5 pull-md-1 login-barber\">\n      <form (keydown.enter)=\"disableEnterKey($event)\" #loginForm=\"ngForm\" novalidate>\n          <div class=\"form-group\">\n              <label for=\"text\">Email</label>\n              <input [(ngModel)]=\"barberInfo.email\" type=\"text\" class=\"form-control\" id=\"email\" placeholder=\"Enter username\" name=\"username\">\n            </div>\n          <div class=\"form-group\">\n            <label for=\"pwd\">Password</label>\n            <input [(ngModel)]=\"barberInfo.password\" type=\"password\" class=\"form-control\" id=\"pwd\" placeholder=\"Enter password\" name=\"pswd\">\n          </div>\n          <div class=\"form-group\" *ngIf=!showAlert>\n            <span class=\"form-control alert alert-warning\">{{alertMessage}}</span>\n          </div>      \n          <button type=\"submit\" (click)=login() class=\"btn btn-primary\">Login</button>\n          <p class=\"oblique\">Barbers login in here</p>\n        </form>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"mani-section\">\n  <div class=\"row justify-content-around\">\n    <div class=\"col-md-5 login-customer text-center\">\n      <a href=\"/home\"><img class=\"img-fluid\"  src=\"../../../assets/img/customers.png\" alt=\"customers\"><p class=\"oblique\">Customers click here</p></a>    \n    </div>\n    <p></p>\n    <div class=\"col-md-5 pull-md-1 login-barber\">\n      <form (keydown.enter)=\"disableEnterKey($event)\" #loginForm=\"ngForm\" novalidate>\n          <div class=\"form-group\">\n              <label for=\"email\">Email</label>\n              <input [pattern]=\"emailPattern\" appUpdateOnblur [(ngModel)]=\"barberInfo.email\" type=\"text\" class=\"form-control\" id=\"email\" placeholder=\"Enter username\" name=\"username\" required>\n            </div>\n          <div class=\"form-group\">\n            <label for=\"pwd\">Password</label>\n            <input  appUpdateOnblur [(ngModel)]=\"barberInfo.password\" type=\"password\" class=\"form-control\" id=\"pwd\" placeholder=\"Enter password\" name=\"password\" required>\n          </div>\n          <div class=\"form-group\" *ngIf=!showAlert>\n            <span class=\"form-control alert alert-warning\">{{alertMessage}}</span>\n          </div>      \n          <button [disabled]=\"loginForm.invalid\" type=\"submit\" (click)=login() class=\"btn btn-primary\">Login</button>\n          <p class=\"oblique\">Barbers login in here</p>\n        </form>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1283,6 +1304,7 @@ var LoginAppComponent = (function () {
         this._http = _http;
         this.router = router;
         this.clientService = clientService;
+        this.emailPattern = "([a-zA-Z0-9]+)([\\_\\.\\-{1}])?([a-zA-Z0-9]+)\\@([a-zA-Z0-9]+)([\\.])([a-zA-Z\\.]+)";
         this.barberInfo = {
             password: '',
             email: ''
@@ -1397,6 +1419,74 @@ var LogoutComponent = (function () {
 
 /***/ }),
 
+/***/ "./src/app/pages/pay/pay.component.css":
+/*!*********************************************!*\
+  !*** ./src/app/pages/pay/pay.component.css ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".mani-section {\r\n  padding-bottom: 100px;\r\n  background-color: #ffffff;\r\n}\r\n\r\n/*.pay-title{\r\n  position: absolute;\r\n  padding: 100px;\r\n}*/\r\n\r\n.header-section {\r\n  padding-top: 50px;\r\n  background-color: #ffffff;\r\n  font-family: Georgia, serif;\r\n}\r\n\r\n.list-service{\r\n  list-style-type: none;\r\n  margin: 0;\r\n  padding: 0;\r\n  overflow: hidden;\r\n}\r\n\r\n.list {\r\n  display: block;\r\n  float:left;\r\n  text-align: center;\r\n  padding: 16px;\r\n}\r\n\r\n@media only screen and (max-width:375px){\r\n  .mani-section{\r\n    padding: 0px;\r\n  }\r\n  .header-section{\r\n    padding: 0px;\r\n    text-align: none;\r\n  }\r\n  h1 {\r\n    font-size: 30px;\r\n  }\r\n\r\n  .list-service{\r\n    list-style-type: none;\r\n    margin: 0;\r\n    padding: 0;\r\n    overflow: hidden;\r\n  }\r\n\r\n  .list {\r\n    display: block;\r\n    float:left;\r\n    clear:left;\r\n    text-align: center;\r\n    padding: 6px;\r\n  }\r\n\r\n}\r\n\r\n@media only screen and (max-width:414px){\r\n  .mani-section{\r\n    padding: 0px;\r\n  }\r\n  .header-section{\r\n    padding: 0px;\r\n    text-align: none;\r\n  }\r\n  .list {\r\n    display: block;\r\n    float:left;\r\n    clear:left;\r\n    text-align: center;\r\n    padding: 6px;\r\n  }\r\n}\r\n"
+
+/***/ }),
+
+/***/ "./src/app/pages/pay/pay.component.html":
+/*!**********************************************!*\
+  !*** ./src/app/pages/pay/pay.component.html ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<section class=\"header-section\">\n  <div class=\"container-fluid\">\n    <div class=\"row\">\n      <div class=\"col-md-5 \">\n        <h2 class=\"pay-title\">Invoice</h2>\n        <ul class=\"list-service\">\n          <li class=\"list\">1. Pay Here</li>\n          <li class=\"list\">2. It's faster</li>\n          <li class=\"list\">3. And more convenient</li>\n        </ul>\n      </div>\n    </div>\n  </div>\n</section>\n\n<section class=\"mani-section\">\n  <div class=\"container-fluid\">\n    <form  #payForm=\"ngForm\" novalidate>\n      <div class=\"row\">\n        <div class=\"col-md-3 \">\n          <div class=\"form-group\">\n            <label for=\"cc-card\">Card number:</label>\n            <input class=\"form-control\" #mycard=\"ngModel\" appUpdateOnblur [(ngModel)]=\"contactInfo.bookingDate\" [owlDateTimeTrigger]=\"dt\" [owlDateTime]=\"dt\" id=\"cc-card\" name=\"card\" size=\"30\" required>\n            <div class=\"alert alert-warning\" *ngIf=\"mycard.errors?.required && mycard.touched\">\n              Date is required.\n            </div>\n          </div>\n          <div class=\"form-group\">\n            <label for=\"cc-name\">Name on card:</label>\n            <input class=\"form-control\" appUpdateOnblur  #ccname=\"ngModel\"  id=\"cc-name\" [(ngModel)]=\"contactInfo.name\" placeholder=\"Enter your name\" name=\"ccname\" (keypress)=\"disableShiftKey($event)\" size=\"30\" required minlength=\"2\" [pattern]=\"namePattern\" >\n            <div class=\"alert alert-warning\" *ngIf=\"ccname.errors?.required && ccname.touched\">\n              Name is required.\n            </div>\n            <div class=\"alert alert-warning\" *ngIf=\"ccname.errors?.minlength && ccname.touched\">\n              Name must be at least 2 characters long.\n            </div>\n          </div>\n          <div class=\"form-group\">\n            <label for=\"cc-expiry\">Expiry date:</label>\n            <select  appUpdateOnblur name=\"ccexpiredate\" class=\"form-control\" id=\"cc-expiry\" #ccexpiredate=\"ngModel\" [(ngModel)]=\"contactInfo.ccexpiredate\" required>\n              <option *ngFor=\"let data of hairStore\" [ngValue]=\"data\"> {{data.hairccexpiredate}}</option>\n            </select>\n            <div class=\"alert alert-warning\" *ngIf=\"ccexpiredate.errors?.required && ccexpiredate.touched\">\n              This field is required.\n            </div>\n          </div>\n          <div class=\"form-group\">\n            <label for=\"cc-code\">Security code:</label>\n            <input type=\"number\" class=\"form-control\" #ccemail=\"ngModel\" [(ngModel)]=\"contactInfo.ccemail\" id=\"cc-code\" [pattern]=\"ccemailPattern\" placeholder=\"...\" name=\"card-cord\" size=\"5\" required appUpdateOnblur>\n            <div class=\"alert alert-warning\" *ngIf=\"ccemail.errors?.required && ccemail.touched\">\n              ccemail is required.\n            </div>\n            <div class=\"alert alert-warning\" *ngIf=\"ccemail.errors?.pattern && ccemail.touched\">\n              Please enter a valid ccemail\n            </div>\n          </div>\n          <button [disabled]=\"payForm.invalid\"  type=\"submit\" class=\"btn btn-primary btn-lg btn-block\">Pay</button>\n        </div> <!-- end-of-first-col -->\n      </div>\n    </form>\n  </div>\n</section>\n"
+
+/***/ }),
+
+/***/ "./src/app/pages/pay/pay.component.ts":
+/*!********************************************!*\
+  !*** ./src/app/pages/pay/pay.component.ts ***!
+  \********************************************/
+/*! exports provided: PayComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PayComponent", function() { return PayComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/esm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var PayComponent = (function () {
+    function PayComponent() {
+        this.hairStore = [
+            { 'hairjob': 'Hair Cut', 'price': 25 },
+            { 'hairjob': 'Line Up', 'price': 15 },
+            { 'hairjob': 'Beard Clean Up', 'price': 15 }
+        ];
+    }
+    PayComponent.prototype.ngOnInit = function () {
+    };
+    PayComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-pay',
+            template: __webpack_require__(/*! ./pay.component.html */ "./src/app/pages/pay/pay.component.html"),
+            styles: [__webpack_require__(/*! ./pay.component.css */ "./src/app/pages/pay/pay.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], PayComponent);
+    return PayComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/pages/register/register.component.css":
 /*!*******************************************************!*\
   !*** ./src/app/pages/register/register.component.css ***!
@@ -1415,7 +1505,7 @@ module.exports = ".mani-section {\r\n    padding: 50px;\r\n    background-color:
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"mani-section\">\n    <div class=\"row \">\n      <div class=\"col-md-12 register-barber\">\n        <form (keydown.enter)=\"disableEnterKey($event)\" #loginForm=\"ngForm\" novalidate>\n          <div class=\"form-group\">\n              <input [(ngModel)]=\"barberInfo.username\" type=\"text\" class=\"form-control\" id=\"username\" placeholder=\"Enter username\" name=\"username\">\n            </div>\n            <div class=\"form-group\">\n                <label for=\"text\">Email</label>\n                <input [(ngModel)]=\"barberInfo.email\" type=\"text\" class=\"form-control\" id=\"email\" placeholder=\"Enter username\" name=\"username\">\n              </div>\n            <div class=\"form-group\">\n              <label for=\"pwd\">Password</label>\n              <input [(ngModel)]=\"barberInfo.password\" type=\"password\" class=\"form-control\" id=\"pwd\" placeholder=\"Enter password\" name=\"pswd\">\n            </div>\n            <button type=\"submit\" (click)=register() class=\"btn btn-primary\">Submit</button>\n          </form>\n      </div>\n    </div>\n  </div>\n  "
+module.exports = "<div class=\"mani-section\">\n    <div class=\"row \">\n      <div class=\"col-md-12 register-barber\">\n        <form (keydown.enter)=\"disableEnterKey($event)\" #loginForm=\"ngForm\" novalidate>\n          <div class=\"form-group\">\n              <input [(ngModel)]=\"barberInfo.username\" type=\"text\" class=\"form-control\" id=\"username\" placeholder=\"Enter username\" name=\"username\">\n            </div>\n            <div class=\"form-group\">\n                <label for=\"email\">Email</label>\n                <input [(ngModel)]=\"barberInfo.email\" type=\"text\" class=\"form-control\" id=\"email\" placeholder=\"Enter username\" name=\"username\">\n              </div>\n            <div class=\"form-group\">\n              <label for=\"pwd\">Password</label>\n              <input [(ngModel)]=\"barberInfo.password\" type=\"password\" class=\"form-control\" id=\"pwd\" placeholder=\"Enter password\" name=\"pswd\">\n            </div>\n            <button type=\"submit\" (click)=register() class=\"btn btn-primary\">Submit</button>\n          </form>\n      </div>\n    </div>\n  </div>\n"
 
 /***/ }),
 
@@ -1516,7 +1606,7 @@ module.exports = ".mani-section {\r\n    padding: 90px;\r\n    background-color:
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<section class=\"mani-section section\">\n    <div class=\"container-fluid text-center\">\n         <div class=\"text-left details\">\n           <h2>Congratulations Appointment Booked:</h2>\n           <p>Please see below for details</p>\n           <p>Your Appointment is Booked For: <b>{{clientDetails.date}}</b></p>\n           <p>Price for service: <b>{{clientDetails.job}}</b></p>\n           <p>Copy of Appointment Sent to : <b>{{clientDetails.email}}</b></p>\n           <span><a href=\"/home\">Click here to return to home page</a></span>\n         </div>       \n      </div>\n</section>\n\n\n"
+module.exports = "\n<section class=\"mani-section section\">\n    <div class=\"container-fluid text-center\">\n         <div class=\"text-left details\">\n           <h2>Congratulations Appointment Booked:</h2>\n           <p>Please see below for details</p>\n           <p>Your Appointment is Booked For: <b>{{clientDetails.date | amDateFormat:'MMMM Do YYYY, h:mm:ss a'}}</b></p>\n           <p>Price for service: <b>{{clientDetails.job}}</b></p>\n           <p>Copy of Appointment Sent to : <b>{{clientDetails.email}}</b></p>\n           <span><a href=\"/home\">Click here to return to home page</a></span>\n         </div>       \n      </div>\n</section>\n\n\n"
 
 /***/ }),
 

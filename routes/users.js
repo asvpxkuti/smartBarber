@@ -7,17 +7,31 @@ const User = require('../models/user');
 const Client = require('../models/Clients');
 const barberUser = require('../models/Users');
 var nodemailer = require('nodemailer');
-
+var stripe = require("stripe")("sk_test_8KEn27WVr2fRHz847DSzDjpf");
 
 /* GET ALL CLIENT */
 router.get('/', function(req, res) {
-  Client.find(function (err, clients) {
+  Client.find().sort({date:'asc'}).exec(function (err, clients) {
     if (err){
       handleError(res,err.message,'data not found');
     }
     ;
     res.json(clients);
   });   
+});
+
+/* PAY CLIENT */
+router.post('/pay', function(req, res, next) {
+  stripe.charges.create({
+    amount: 2000,
+    currency: "cad",
+    source: "tok_visa", // obtained with Stripe.js
+    description: "Charge for jenny.rosen@example.com"
+  }, function(err, charge) {
+    // asynchronously called
+    if(err) return next(err);
+    res.json(charge);
+  });
 });
 
 
@@ -50,9 +64,10 @@ router.put('/:id', function(req, res, next) {
 router.delete('/:id', function(req, res, next) {
   Client.findByIdAndRemove(req.params.id, req.body, function (err, post) {
     if (err) return next(err);
-    res.json(post);
+    res.json({success:true});;
   });
 });
+
 
 
 //Email Client
@@ -146,42 +161,9 @@ router.post('/register',(req, res)=>{
           success: false,
           message: 'Please enter email and password.'
         });
-      } else {barberUser.addUser(req,res);}
-});
-
-router.post('/authenticate', (req, res) => {
-  barberUser.findOne({
-    email: req.body.email
-  }, function(err, username) {
-    if (err) throw err;
-
-    if (!username) {
-      res.send({
-        success: false,
-        message: 'Authentication failed. User not found.'
-      });
-    } else {
-      // Check if password matches
-      barberUser.comparePassword(req.body.password,username.password, function(err, isMatch) {
-        if (isMatch && !err) {
-          // Create token if the password matched and no error was thrown
-          var token = jwt.sign({auth: username.username},config.secret , {
-            expiresIn: "1 days"
-          });
-          res.json({
-            success: true,
-            message: 'Authentication successfull',
-            token
-          });
-        } else {
-          res.send({
-            success: false,
-            message: 'Authentication failed. Passwords did not match.'
-          });
-        }
-      });
-    }
-  });
+      } else {
+        barberUser.addUser(req,res);
+      }
 });
 
 
