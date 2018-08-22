@@ -106,13 +106,11 @@ router.delete('/:id', function(req, res, next) {
     // send mail with defined transport object
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-            return console.log(error);
+            return res.json({success:false,msg:'something went wrong'});
         }else{
-          res.json({msg:'email sent',success:true})
+          res.json({msg:'email sent',success:true});
         }
-        console.log('Message sent: %s', info.messageId);
-        // Preview only available when sending through an Ethereal account
-        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+       
     });
   });
   

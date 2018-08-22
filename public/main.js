@@ -552,6 +552,15 @@ var UpdateOnblurDirective = (function () {
         }
         this.ngModel.options.updateOn = 'blur';
     }
+    UpdateOnblurDirective.prototype.onFocus = function () {
+        this.ngModel.reset();
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["HostListener"])("focus"),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", void 0)
+    ], UpdateOnblurDirective.prototype, "onFocus", null);
     UpdateOnblurDirective = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Directive"])({
             selector: '[ngModel][appUpdateOnblur]',
@@ -873,7 +882,7 @@ module.exports = ".mani-section{\r\n    padding: 50px;\r\n    background-color: 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-header></app-header>\n<section class=\"header-section\">\n    <div class=\"container-fluid\">\n          <ul class=\"list-service\">\n              <li class=\"list\">1. Pick a day</li>\n              <li class=\"list\">2. Pick a service</li>\n              <li class=\"list\">3. Click send and your done</li>\n          </ul>\n    </div>  \n</section>\n\n<section class=\"mani-section\">\n    <div class=\"container-fluid\">\n        <form  (keydown.enter)=\"disableEnterKey($event)\" #personalForm=\"ngForm\" novalidate>\n          <div class=\"row\">\n            <div class=\"col-md-3\">\n              <div class=\"form-group\">\n                  <label for=\"mydate\">Date:</label>\n                  <input class=\"form-control\" #mydate=\"ngModel\" appUpdateOnblur [(ngModel)]=\"contactInfo.bookingDate\" [owlDateTimeTrigger]=\"dt\" [owlDateTime]=\"dt\" id=\"mydate\" name=\"mydate\" size=\"30\" required>\n                  <div class=\"alert alert-warning\" *ngIf=\"mydate.errors?.required && mydate.touched\">\n                      Date is required.\n                    </div>\n                  <owl-date-time [hour12Timer]=\"true\" #dt></owl-date-time>\n              </div>\n              <div class=\"form-group\">\n                  <label for=\"name\">Name:</label>\n                  <input class=\"form-control\" appUpdateOnblur  #name_=\"ngModel\"  id=\"name\" [(ngModel)]=\"contactInfo.name\" placeholder=\"Enter your name\" name=\"name_\" (keypress)=\"disableShiftKey($event)\" size=\"30\" required minlength=\"2\" [pattern]=\"namePattern\" >\n                  <div class=\"alert alert-warning\" *ngIf=\"name_.errors?.required && name_.touched\">\n                    Name is required.\n                  </div>\n                  <div class=\"alert alert-warning\" *ngIf=\"name_.errors?.minlength && name_.touched\">\n                    Name must be at least 2 characters long.\n                  </div>\n              </div>\n            </div> <!-- end-of-first-col -->\n            <div class=\"col-md-3\">\n              <!-- <h3 class=\"text-center\">Pick a service</h3> -->\n              <div class=\"form-group\">\n                  <label for=\"name\">I Need A:</label>\n                  <select  appUpdateOnblur name=\"job\" class=\"form-control\" id=\"job\" #job=\"ngModel\" [(ngModel)]=\"contactInfo.job\" required>\n                    <option *ngFor=\"let data of hairStore\" [ngValue]=\"data.price\"> {{data.hairjob}}</option>\n                  </select>\n                  <div class=\"alert alert-warning\" *ngIf=\"job.errors?.required && job.touched\">\n                    This field is required.\n                  </div>\n              </div>\n              <div class=\"form-group\">\n                  <label for=\"email\">Email:</label>\n                  <input class=\"form-control\" #email=\"ngModel\" [(ngModel)]=\"contactInfo.email\" id=\"email\" [pattern]=\"emailPattern\" placeholder=\"Enter email\" name=\"email\" size=\"30\" required appUpdateOnblur>\n                  <div class=\"alert alert-warning\" *ngIf=\"email.errors?.required && email.touched\">\n                    Email is required.\n                  </div>\n                  <div class=\"alert alert-warning\" *ngIf=\"email.errors?.pattern && email.touched\">\n                    Please enter a valid email\n                  </div>\n              </div>\n              <button [disabled]=\"personalForm.invalid\" (click)=emailUser() type=\"submit\" class=\"btn btn-primary btn-lg btn-block\">Book</button>\n            </div>\n            <div class=\"col-md-6\">\n              <div class=\"form-group\">\n                  <p></p>\n                  <p>Your Name is: {{contactInfo.name}}</p>\n                  <p>Your Email is: {{contactInfo.email}}<p>\n                  <p>Your Appointment is on: {{contactInfo.bookingDate | amDateFormat:'MMMM Do YYYY, h:mm:ss a' }}</p>\n                  <p>Your Total Cost is: {{contactInfo.job}}</p>\n              </div>\n            </div>\n          </div> <!-- end-of-first-row -->\n        </form>\n    </div>\n</section>\n<div class=\"pay-section\">\n  <div class=\"container-fluid\">\n      <a (click)=\"toggle()\" class=\"btn btn-warning btn-lg\">\n        <span *ngIf=\"!edit\">Pay here</span>\n        <span *ngIf=\"edit\">Pay in person</span>\n      </a>\n  </div>\n  <ng-container *ngIf='edit'><app-pay></app-pay></ng-container>\n</div>\n\n \n\n\n\n\n\n  \n"
+module.exports = "<app-header></app-header>\n<section class=\"header-section\">\n    <div class=\"container-fluid\">\n          <ul class=\"list-service\">\n              <li class=\"list\">1. Pick a day</li>\n              <li class=\"list\">2. Pick a service</li>\n              <li class=\"list\">3. Click send and your done</li>\n          </ul>\n    </div>  \n</section>\n<section id=\"emailForm\" class=\"mani-section\">\n    <div class=\"container-fluid\">\n        <form  (keydown.enter)=\"disableEnterKey($event)\" #personalForm=\"ngForm\" novalidate>\n          <div class=\"row\">\n            <div class=\"col-md-3\">\n              <div class=\"form-group\">\n                  <label for=\"mydate\">Date:</label>\n                  <input class=\"form-control\" #mydate=\"ngModel\" appUpdateOnblur [(ngModel)]=\"contactInfo.bookingDate\" [owlDateTimeTrigger]=\"dt\" [owlDateTime]=\"dt\" id=\"mydate\" name=\"mydate\" size=\"30\" required>\n                  <div class=\"alert alert-warning\" *ngIf=\"mydate.errors?.required && mydate.touched\">\n                      Date is required.\n                    </div>\n                  <owl-date-time [hour12Timer]=\"true\" #dt></owl-date-time>\n              </div>\n              <div class=\"form-group\">\n                  <label for=\"name\">Name:</label>\n                  <input class=\"form-control\" appUpdateOnblur  #name_=\"ngModel\"  id=\"name\" [(ngModel)]=\"contactInfo.name\" placeholder=\"Enter your name\" name=\"name_\" (keypress)=\"disableShiftKey($event)\" size=\"30\" required minlength=\"2\" [pattern]=\"namePattern\" >\n                  <div class=\"alert alert-warning\" *ngIf=\"name_.errors?.required && name_.touched\">\n                    Name is required.\n                  </div>\n                  <div class=\"alert alert-warning\" *ngIf=\"name_.errors?.minlength && name_.touched\">\n                    Name must be at least 2 characters long.\n                  </div>\n              </div>\n            </div> <!-- end-of-first-col -->\n            <div class=\"col-md-3\">\n              <!-- <h3 class=\"text-center\">Pick a service</h3> -->\n              <div class=\"form-group\">\n                  <label for=\"name\">I Need A:</label>\n                  <select  appUpdateOnblur name=\"job\" class=\"form-control\" id=\"job\" #job=\"ngModel\" [(ngModel)]=\"contactInfo.job\" required>\n                    <option *ngFor=\"let data of hairStore\" [ngValue]=\"data.price\"> {{data.hairjob}}</option>\n                  </select>\n                  <div class=\"alert alert-warning\" *ngIf=\"job.errors?.required && job.touched\">\n                    This field is required.\n                  </div>\n              </div>\n              <div class=\"form-group\">\n                  <label for=\"email\">Email:</label>\n                  <input class=\"form-control\" #email=\"ngModel\" [(ngModel)]=\"contactInfo.email\" id=\"email\" [pattern]=\"emailPattern\" placeholder=\"Enter email\" name=\"email\" size=\"30\" required appUpdateOnblur>\n                  <div class=\"alert alert-warning\" *ngIf=\"email.errors?.required && email.touched\">\n                    Email is required.\n                  </div>\n                  <div class=\"alert alert-warning\" *ngIf=\"email.errors?.pattern && email.touched\">\n                    Please enter a valid email\n                  </div>\n              </div>\n              <button [disabled]=\"personalForm.invalid\" (click)=emailUser() type=\"submit\" class=\"btn btn-primary btn-lg btn-block\">Book</button>\n            </div>\n            <div class=\"col-md-6\">\n              <div class=\"form-group\">\n                  <p></p>\n                  <p>Your Name is: {{contactInfo.name}}</p>\n                  <p>Your Email is: {{contactInfo.email}}<p>\n                  <p>Your Appointment is on: {{contactInfo.bookingDate | amDateFormat:'MMMM Do YYYY, h:mm:ss a' }}</p>\n                  <p>Your Total Cost is: {{contactInfo.job}}</p>\n              </div>\n            </div>\n          </div> <!-- end-of-first-row -->\n        </form>\n    </div>\n</section>\n<!--<ng-container *ngIf=\"onSuccess()\">\n  <app-success></app-success>\n</ng-container>-->\n<div class=\"pay-section\">\n  <div class=\"container-fluid\">\n      <a (click)=\"toggle()\" class=\"btn btn-warning btn-lg\">\n        <span *ngIf=\"!edit\">Pay here</span>\n        <span *ngIf=\"edit\">Pay in person</span>\n      </a>\n  </div>\n  <ng-container *ngIf='edit'><app-pay></app-pay></ng-container>\n</div>\n\n \n\n\n\n\n\n  \n"
 
 /***/ }),
 
@@ -891,6 +900,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/esm5/router.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/esm5/http.js");
 /* harmony import */ var _service_client_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../service/client.service */ "./src/app/service/client.service.ts");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_4__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -900,6 +911,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -923,8 +935,18 @@ var EmailContactsComponent = (function () {
             bookingDate: null,
             job: ''
         };
+        this.valid = false;
+        this.appointmentBooked = false;
     }
     EmailContactsComponent.prototype.ngOnInit = function () {
+        this.loadForm();
+    };
+    EmailContactsComponent.prototype.loadForm = function () {
+        jquery__WEBPACK_IMPORTED_MODULE_4__(document).ready(function () {
+            jquery__WEBPACK_IMPORTED_MODULE_4__("#emailForm").load(function () {
+                jquery__WEBPACK_IMPORTED_MODULE_4__("#emailForm").fadeIn('slow');
+            });
+        });
     };
     EmailContactsComponent.prototype.emailUser = function () {
         var _this = this;
@@ -944,6 +966,7 @@ var EmailContactsComponent = (function () {
         this.clientService.sendClientData(this.data_, { headers: httpsHeaders, observe: 'response' }).subscribe(function (data) {
             console.log(_this.data_);
             if (data) {
+                _this.appointmentBooked = data.success;
                 console.log("successfully sent email");
                 _this.router.navigate(['success', { 'client': _this.clientData }]);
             }
@@ -971,6 +994,9 @@ var EmailContactsComponent = (function () {
     };
     EmailContactsComponent.prototype.toggle = function () {
         this.edit = !this.edit;
+    };
+    EmailContactsComponent.prototype.onSuccess = function () {
+        this.valid = this.clientService.validateUser();
     };
     EmailContactsComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1167,7 +1193,6 @@ var HeaderComponent = (function () {
     }
     HeaderComponent.prototype.ngOnInit = function () {
         this.validated = this.clientService.validateUser();
-        console.log(JSON.stringify(this.validated));
     };
     HeaderComponent.prototype.logout = function () {
         this.clientService.logoutUser();
