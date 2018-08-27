@@ -1292,7 +1292,7 @@ module.exports = ".mani-section {\r\n    padding: 50px;\r\n    background-color:
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"mani-section\">\n  <div class=\"row justify-content-around\">\n    <div class=\"col-md-5 login-customer text-center\">\n      <a href=\"/home\"><img class=\"img-fluid\"  src=\"../../../assets/img/customers.png\" alt=\"customers\"><p class=\"oblique\">Customers click here</p></a>    \n    </div>\n    <p></p>\n    <div *ngIf=\"!tokenSet\" class=\"col-md-5 pull-md-1 login-barber\">\n      <button type=\"button\" (click)=\"signIn()\" class=\"btn btn-primary btn-lg\">Sign In</button>\n      <p class=\"oblique\">Barbers login in here</p>\n    </div>\n    <div *ngIf=\"tokenSet\" class=\"col-md-5 pull-md-1 login-barber\">\n      <form (keydown.enter)=\"disableEnterKey($event)\" #loginForm=\"ngForm\" novalidate>\n          <div class=\"form-group\">\n              <label for=\"email\">Email</label>\n              <input [pattern]=\"emailPattern\" appUpdateOnblur [(ngModel)]=\"barberInfo.email\" type=\"text\" class=\"form-control\" id=\"email\" placeholder=\"Enter username\" name=\"username\" required>\n            </div>\n          <div class=\"form-group\">\n            <label for=\"pwd\">Password</label>\n            <input  appUpdateOnblur [(ngModel)]=\"barberInfo.password\" type=\"password\" class=\"form-control\" id=\"pwd\" placeholder=\"Enter password\" name=\"password\" required>\n          </div>\n          <div class=\"form-group\" *ngIf=!showAlert>\n            <span class=\"form-control alert alert-warning\">{{alertMessage}}</span>\n          </div>      \n          <button type=\"submit\" (click)=login() class=\"btn btn-primary\">Login</button>\n          <p class=\"oblique\">Barbers login in here</p>\n        </form>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"mani-section\">\n  <div class=\"row justify-content-around\">\n    <div class=\"col-md-5 login-customer text-center\">\n      <a href=\"/home\"><img class=\"img-fluid\"  src=\"../../../assets/img/customers.png\" alt=\"customers\"><p class=\"oblique\">Customers click here</p></a>    \n    </div>\n    <p></p>\n    <div *ngIf=\"!tokenSet\" class=\"col-md-5 pull-md-1 login-barber\">\n      <button type=\"button\" (click)=\"signIn()\" class=\"btn btn-primary btn-lg\">Sign In</button>\n      <p class=\"oblique\">Barbers login in here</p>\n    </div>\n    <div *ngIf=\"tokenSet\" class=\"col-md-5 pull-md-1 login-barber\">\n      <div *ngIf=!showAlert class=\"alert alert-warning\">{{alertMessage}}</div>\n      <form id=\"formAlert\" (keydown.enter)=\"disableEnterKey($event)\" #loginForm=\"ngForm\" novalidate>\n          <div class=\"form-group\">\n              <label for=\"email\">Email</label>\n              <input [pattern]=\"emailPattern\" appUpdateOnblur [(ngModel)]=\"barberInfo.email\" type=\"text\" class=\"form-control\" id=\"email\" placeholder=\"Enter username\" name=\"username\" required>\n            </div>\n          <div class=\"form-group\">\n            <label for=\"pwd\">Password</label>\n            <input  appUpdateOnblur [(ngModel)]=\"barberInfo.password\" type=\"password\" class=\"form-control\" id=\"pwd\" placeholder=\"Enter password\" name=\"password\" required>\n          </div>\n\n          <button type=\"submit\" (click)=login() class=\"btn btn-primary\">Login</button>\n          <p class=\"oblique\">Barbers login in here</p>\n        </form>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1337,25 +1337,22 @@ var LoginAppComponent = (function () {
             password: '',
             email: ''
         };
-        this.loggedIn = true;
     }
     LoginAppComponent.prototype.ngOnInit = function () {
         this.showAlert = true;
     };
     LoginAppComponent.prototype.login = function () {
         var _this = this;
-        var HEADERS = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]();
-        HEADERS.set('Content-Type', 'application/x-www-form-urlencoded');
-        /*let HEADERS = new HttpHeaders({
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'X-XSRF-TOKEN':this.cookieService.get('XSRF-TOKEN')
-        });*/
         this.data_ = {
             'email': this.barberInfo.email,
             'password': this.barberInfo.password
         };
+        var form = document.getElementById('formAlert');
+        form.addEventListener("focus", function () {
+            _this.showAlert = true;
+        }, true);
         this.clientService.login(this.data_).subscribe(function (data) {
-            console.log(_this.data_);
+            //console.log(this.data_);
             if (data.body.token) {
                 _this.clientService.storeUserData(data.body.token);
                 console.log("successfully sent email");
@@ -1369,14 +1366,14 @@ var LoginAppComponent = (function () {
         });
     };
     LoginAppComponent.prototype.signIn = function () {
-        this.clientService.fetchToken().subscribe();
-        if (this.cookieService.get('XSRF-TOKEN') !== undefined) {
-            console.log(this.cookieService.get('XSRF-TOKEN'));
-            this.tokenSet = true;
-        }
-        else {
-            this.loggedIn = false;
-        }
+        /* this.clientService.fetchToken().subscribe();
+         if(this.cookieService.get('XSRF-TOKEN') !== undefined){
+           console.log(this.cookieService.get('XSRF-TOKEN'));
+           this.tokenSet=true;
+         }else {
+           this.loggedIn=false;
+         }*/
+        this.tokenSet = true;
     };
     LoginAppComponent.prototype.disableEnterKey = function (event) {
         if (event.keyCode === 13) {
