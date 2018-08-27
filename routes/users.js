@@ -8,6 +8,13 @@ const Client = require('../models/Clients');
 const barberUser = require('../models/Users');
 var nodemailer = require('nodemailer');
 var stripe = require("stripe")("sk_test_8KEn27WVr2fRHz847DSzDjpf");
+const csurf =  require('csurf');
+
+const csrfMiddleware = csurf({
+  cookie: {
+    key:'XSRF-TOKEN',
+  }
+});
 
 /* GET ALL CLIENT */
 router.get('/', function(req, res) {
@@ -15,7 +22,6 @@ router.get('/', function(req, res) {
     if (err){
       handleError(res,err.message,'data not found');
     }
-    ;
     res.json(clients);
   });   
 });
@@ -69,7 +75,6 @@ router.delete('/:id', function(req, res, next) {
 });
 
 
-
 //Email Client
  router.post('/sendmail', function(req, res) {
   
@@ -115,6 +120,15 @@ router.delete('/:id', function(req, res, next) {
   });
   
 });
+
+/* router.get('/goku',(req, res) =>{
+  res.json({'tokenCreated':true});
+});
+
+router.post('/goku',(req, res) =>{
+    console.log(JSON.stringify(req.body));
+    res.json({msg:"csurf works"});
+}); */
 
 router.post('/authenticate', (req, res) => {
   barberUser.findOne({

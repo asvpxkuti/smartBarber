@@ -4,6 +4,7 @@ var CustomerInfo = new mongoose.Schema({
   name: String,
   email: String,
   date:{type:Date},
+  job:Object,
   submitted_date: {type: Date, default: Date.now()},
 });
 
