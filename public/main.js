@@ -322,6 +322,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_register_register_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../pages/register/register.component */ "./src/app/pages/register/register.component.ts");
 /* harmony import */ var _pages_error_page_error_page_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../pages/error-page/error-page.component */ "./src/app/pages/error-page/error-page.component.ts");
 /* harmony import */ var _pages_pay_pay_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../pages/pay/pay.component */ "./src/app/pages/pay/pay.component.ts");
+/* harmony import */ var _pages_confirmation_confirmation_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../pages/confirmation/confirmation.component */ "./src/app/pages/confirmation/confirmation.component.ts");
+
 
 
 
@@ -341,7 +343,8 @@ var routes = [
     { path: 'dashboard', component: _pages_login_app_login_app_component__WEBPACK_IMPORTED_MODULE_5__["LoginAppComponent"] },
     { path: 'register', component: _pages_register_register_component__WEBPACK_IMPORTED_MODULE_6__["RegisterComponent"] },
     { path: 'error', component: _pages_error_page_error_page_component__WEBPACK_IMPORTED_MODULE_7__["ErrorPageComponent"] },
-    { path: 'pay', component: _pages_pay_pay_component__WEBPACK_IMPORTED_MODULE_8__["PayComponent"] }
+    { path: 'pay', component: _pages_pay_pay_component__WEBPACK_IMPORTED_MODULE_8__["PayComponent"] },
+    { path: 'confirmation', component: _pages_confirmation_confirmation_component__WEBPACK_IMPORTED_MODULE_9__["ConfirmationComponent"] }
 ];
 
 
@@ -443,12 +446,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ngx-cookie-service */ "./node_modules/ngx-cookie-service/index.js");
 /* harmony import */ var _pages_logout_logout_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./pages/logout/logout.component */ "./src/app/pages/logout/logout.component.ts");
 /* harmony import */ var _pages_pay_pay_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./pages/pay/pay.component */ "./src/app/pages/pay/pay.component.ts");
+/* harmony import */ var ngx_stripe__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ngx-stripe */ "./node_modules/ngx-stripe/esm5/ngx-stripe.js");
+/* harmony import */ var _pages_confirmation_confirmation_component__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./pages/confirmation/confirmation.component */ "./src/app/pages/confirmation/confirmation.component.ts");
+/* harmony import */ var _filters_format_pipe__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./filters/format.pipe */ "./src/app/filters/format.pipe.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
+
 
 
 
@@ -496,12 +505,15 @@ var AppModule = (function () {
                 _pages_register_register_component__WEBPACK_IMPORTED_MODULE_20__["RegisterComponent"],
                 _pages_error_page_error_page_component__WEBPACK_IMPORTED_MODULE_22__["ErrorPageComponent"],
                 _pages_logout_logout_component__WEBPACK_IMPORTED_MODULE_25__["LogoutComponent"],
-                _pages_pay_pay_component__WEBPACK_IMPORTED_MODULE_26__["PayComponent"]
+                _pages_pay_pay_component__WEBPACK_IMPORTED_MODULE_26__["PayComponent"],
+                _pages_confirmation_confirmation_component__WEBPACK_IMPORTED_MODULE_28__["ConfirmationComponent"],
+                _filters_format_pipe__WEBPACK_IMPORTED_MODULE_29__["FormatPipe"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormsModule"],
                 ngx_moment__WEBPACK_IMPORTED_MODULE_21__["MomentModule"],
+                ngx_stripe__WEBPACK_IMPORTED_MODULE_27__["NgxStripeModule"].forRoot('pk_test_rV5ZGoyrIg80iCIPNOwEuYsv'),
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClientModule"],
                 ng_http_loader_ng_http_loader_module__WEBPACK_IMPORTED_MODULE_23__["NgHttpLoaderModule"],
                 _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_15__["BrowserAnimationsModule"],
@@ -509,7 +521,7 @@ var AppModule = (function () {
                 ng_pick_datetime__WEBPACK_IMPORTED_MODULE_16__["OwlNativeDateTimeModule"],
                 _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forRoot(_app_routes_routes__WEBPACK_IMPORTED_MODULE_3__["routes"])
             ],
-            providers: [_service_client_service__WEBPACK_IMPORTED_MODULE_5__["ClientService"], ngx_cookie_service__WEBPACK_IMPORTED_MODULE_24__["CookieService"]],
+            providers: [_service_client_service__WEBPACK_IMPORTED_MODULE_5__["ClientService"], ngx_cookie_service__WEBPACK_IMPORTED_MODULE_24__["CookieService"], _filters_format_pipe__WEBPACK_IMPORTED_MODULE_29__["FormatPipe"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
         })
     ], AppModule);
@@ -578,6 +590,57 @@ var UpdateOnblurDirective = (function () {
 
 /***/ }),
 
+/***/ "./src/app/filters/format.pipe.ts":
+/*!****************************************!*\
+  !*** ./src/app/filters/format.pipe.ts ***!
+  \****************************************/
+/*! exports provided: FormatPipe */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormatPipe", function() { return FormatPipe; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/esm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var FormatPipe = (function () {
+    function FormatPipe() {
+    }
+    FormatPipe.prototype.transform = function (value, args) {
+        if (typeof value == 'undefined') {
+            return;
+        }
+        if (value && typeof value !== 'string') {
+            this.data_ = value.toString();
+            this.format(this.data_);
+        }
+        else {
+            this.format(value);
+        }
+        return this.value_;
+    };
+    FormatPipe.prototype.format = function (data) {
+        if (data.length === 4) {
+            this.value_ = data.substring(0, 2) + '.' + data.substring(2);
+        }
+    };
+    FormatPipe = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Pipe"])({
+            name: 'priceFilter'
+        })
+    ], FormatPipe);
+    return FormatPipe;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/pages/about-company/about-company.component.css":
 /*!*****************************************************************!*\
   !*** ./src/app/pages/about-company/about-company.component.css ***!
@@ -639,6 +702,69 @@ var AboutCompanyComponent = (function () {
         __metadata("design:paramtypes", [_service_client_service__WEBPACK_IMPORTED_MODULE_1__["ClientService"]])
     ], AboutCompanyComponent);
     return AboutCompanyComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/pages/confirmation/confirmation.component.css":
+/*!***************************************************************!*\
+  !*** ./src/app/pages/confirmation/confirmation.component.css ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".mani-section {\r\n  padding: 90px;\r\n  background-color: #ffffff;\r\n}\r\n\r\n@media only screen and (max-width:375px){\r\n  .section{\r\n    padding: 0px;\r\n  }\r\n}\r\n\r\n@media only screen and (max-width:414px){\r\n  .section{\r\n    padding: 0px;\r\n  }\r\n}\r\n"
+
+/***/ }),
+
+/***/ "./src/app/pages/confirmation/confirmation.component.html":
+/*!****************************************************************!*\
+  !*** ./src/app/pages/confirmation/confirmation.component.html ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n<section class=\"mani-section section\">\n  <div class=\"container-fluid text-center\">\n    <div class=\"text-left details\">\n      <h2>Congratulations Payment Received</h2>\n      <p>Please see below for details</p>\n      <p>See you soon and thanks for your business</p>\n      <span><a href=\"/home\">Click here to return to home page</a></span>\n    </div>\n  </div>\n</section>\n\n\n"
+
+/***/ }),
+
+/***/ "./src/app/pages/confirmation/confirmation.component.ts":
+/*!**************************************************************!*\
+  !*** ./src/app/pages/confirmation/confirmation.component.ts ***!
+  \**************************************************************/
+/*! exports provided: ConfirmationComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ConfirmationComponent", function() { return ConfirmationComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/esm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ConfirmationComponent = (function () {
+    function ConfirmationComponent() {
+    }
+    ConfirmationComponent.prototype.ngOnInit = function () {
+    };
+    ConfirmationComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-confirmation',
+            template: __webpack_require__(/*! ./confirmation.component.html */ "./src/app/pages/confirmation/confirmation.component.html"),
+            styles: [__webpack_require__(/*! ./confirmation.component.css */ "./src/app/pages/confirmation/confirmation.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ConfirmationComponent);
+    return ConfirmationComponent;
 }());
 
 
@@ -879,7 +1005,7 @@ module.exports = ".mani-section{\r\n    padding: 50px;\r\n    background-color: 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-header></app-header>\n<section class=\"header-section\">\n    <div class=\"container-fluid\">\n          <ul class=\"list-service\">\n              <li class=\"list\">1. Pick a day</li>\n              <li class=\"list\">2. Pick a service</li>\n              <li class=\"list\">3. Click send and your done</li>\n          </ul>\n    </div>  \n</section>\n<section id=\"emailForm\" class=\"mani-section\">\n    <div class=\"container-fluid\">\n        <form  (keydown.enter)=\"disableEnterKey($event)\" #personalForm=\"ngForm\" novalidate>\n          <div class=\"row\">\n            <div class=\"col-md-3\">\n              <div class=\"form-group\">\n                  <label for=\"appdate\">Date:</label>\n                  <input class=\"form-control\" #appdate=\"ngModel\" appUpdateOnblur [(ngModel)]=\"contactInfo.bookingDate\" [owlDateTimeTrigger]=\"dt\" [owlDateTime]=\"dt\" id=\"appdate\" name=\"appdate\" size=\"30\" required>\n                  <div class=\"alert alert-warning\" *ngIf=\"appdate.errors?.required && appdate.touched\">\n                      Date is required.\n                  </div>\n                  <div class=\"alert alert-warning\" *ngIf=\"appdate.errors?.pattern && appdate.touched\">\n                    Date is required.\n                  </div>\n                  <owl-date-time [hour12Timer]=\"true\" #dt></owl-date-time>\n              </div>\n              <div class=\"form-group\">\n                  <label for=\"name\">Name:</label>\n                  <input class=\"form-control\" appUpdateOnblur  #name_=\"ngModel\"  id=\"name\" [(ngModel)]=\"contactInfo.name\" placeholder=\"Enter your name\" name=\"name_\" (keypress)=\"disableShiftKey($event)\" size=\"30\" required minlength=\"2\" [pattern]=\"namePattern\" >\n                  <div class=\"alert alert-warning\" *ngIf=\"name_.errors?.required && name_.touched\">\n                    Name is required.\n                  </div>\n                  <div class=\"alert alert-warning\" *ngIf=\"name_.errors?.minlength && name_.touched\">\n                    Name must be at least 2 characters long.\n                  </div>\n                <div class=\"alert alert-warning\" *ngIf=\"name_.errors?.pattern && name_.touched\">\n                  Alpha numeric characters only.\n                </div>\n              </div>\n            </div> <!-- end-of-first-col -->\n            <div class=\"col-md-3\">\n              <!-- <h3 class=\"text-center\">Pick a service</h3> -->\n              <div class=\"form-group\">\n                  <label for=\"name\">I Need A:</label>\n                  <select  appUpdateOnblur name=\"job\" class=\"form-control\" id=\"job\" #job=\"ngModel\" [(ngModel)]=\"contactInfo.job\" required>\n                    <option *ngFor=\"let data of hairStore\" [ngValue]=\"data\"> {{data.hairjob}}</option>\n                  </select>\n                  <div class=\"alert alert-warning\" *ngIf=\"job.errors?.required && job.touched\">\n                    This field is required.\n                  </div>\n              </div>\n              <div class=\"form-group\">\n                  <label for=\"email\">Email:</label>\n                  <input class=\"form-control\" #email=\"ngModel\" [(ngModel)]=\"contactInfo.email\" id=\"email\" [pattern]=\"emailPattern\" placeholder=\"Enter email\" name=\"email\" size=\"30\" required appUpdateOnblur>\n                  <div class=\"alert alert-warning\" *ngIf=\"email.errors?.required && email.touched\">\n                    Email is required.\n                  </div>\n                  <div class=\"alert alert-warning\" *ngIf=\"email.errors?.pattern && email.touched\">\n                    Please enter a valid email\n                  </div>\n              </div>\n              <button [disabled]=\"personalForm.invalid\" (click)=emailUser() type=\"submit\" class=\"btn btn-primary btn-lg btn-block\">Book</button>\n            </div>\n            <div class=\"col-md-6\">\n              <div class=\"form-group\">\n                  <p></p>\n                  <p>Your Name is: </p><h2>{{contactInfo.name}}</h2>\n                  <p>Your Email is: </p><h2>{{contactInfo.email}}</h2>\n                  <p>Your Appointment is on: </p><h2>{{contactInfo.bookingDate | amDateFormat:'MMMM Do YYYY, h:mm:ss a' }}</h2>\n                  <p>Your Total Cost is: </p><h2>{{contactInfo.job[\"price\"] | json}}</h2>\n              </div>\n            </div>\n          </div> <!-- end-of-first-row -->\n        </form>\n    </div>\n</section>\n<!--<ng-container *ngIf=\"onSuccess()\">\n  <app-success></app-success>\n</ng-container>-->\n<div class=\"pay-section\">\n  <div class=\"container-fluid\">\n      <a (click)=\"toggle()\" class=\"btn btn-warning btn-lg\">\n        <span *ngIf=\"!edit\">Pay here</span>\n        <span *ngIf=\"edit\">Pay in person</span>\n      </a>\n  </div>\n  <ng-container *ngIf='edit'><app-pay></app-pay></ng-container>\n</div>\n\n \n\n\n\n\n\n  \n"
+module.exports = "<app-header></app-header>\n<section class=\"header-section\">\n    <div class=\"container-fluid\">\n          <ul class=\"list-service\">\n              <li class=\"list\">1. Pick a day</li>\n              <li class=\"list\">2. Pick a service</li>\n              <li class=\"list\">3. Click send and your done</li>\n          </ul>\n    </div>  \n</section>\n<br>\n<section id=\"emailForm\" class=\"mani-section\">\n    <div class=\"container-fluid\">\n        <form  (keydown.enter)=\"disableEnterKey($event)\" #clientForm=\"ngForm\" novalidate>\n          <div class=\"row\">\n            <div class=\"col-md-6\">\n              <!--<br>-->\n              <div class=\"form-group\">\n                  <label for=\"appdate\">Date:</label>\n                  <input class=\"form-control\" #appdate=\"ngModel\" appUpdateOnblur [(ngModel)]=\"contactInfo.bookingDate\" [owlDateTimeTrigger]=\"dt1\" [owlDateTimeFilter]=\"filterSundays\" [min]=\"startDate\" [max]=\"endDate\" [owlDateTime]=\"dt1\" id=\"appdate\" name=\"appdate\" size=\"30\" required>\n                  <div class=\"alert alert-warning\" *ngIf=\"appdate.errors?.required && appdate.touched\">\n                      Date is required.\n                  </div>\n                  <div class=\"alert alert-warning\" *ngIf=\"appdate.errors?.pattern && appdate.touched\">\n                    Date is required.\n                  </div>\n                  <owl-date-time [startAt]=\"startDate\" [stepMinute]=\"30\" [hour12Timer]=\"true\" #dt1></owl-date-time>\n              </div>\n              <div class=\"form-group\">\n                  <label for=\"name\">Name:</label>\n                  <input class=\"form-control\" appUpdateOnblur  #name_=\"ngModel\"  id=\"name\" [(ngModel)]=\"contactInfo.name\" placeholder=\"Enter your name\" name=\"name_\"  size=\"30\" required minlength=\"2\" [pattern]=\"namePattern\" >\n                  <div class=\"alert alert-warning\" *ngIf=\"name_.errors?.required && name_.touched\">\n                    Name is required.\n                  </div>\n                  <div class=\"alert alert-warning\" *ngIf=\"name_.errors?.minlength && name_.touched\">\n                    Name must be at least 2 characters long.\n                  </div>\n                <div class=\"alert alert-warning\" *ngIf=\"name_.errors?.pattern && name_.touched\">\n                  Alpha numeric characters only.\n                </div>\n              </div>\n            </div>\n            <div class=\"col-md-6\">\n              <div class=\"form-group\">\n                  <label for=\"name\">I Need A:</label>\n                  <select  appUpdateOnblur name=\"job\" class=\"form-control\" id=\"job\" #job=\"ngModel\" [(ngModel)]=\"contactInfo.job\" (ngModelChange)=\"onChange($event)\" required>\n                    <option *ngFor=\"let data of hairStore\" [ngValue]=\"data\"> {{data.hairjob}}</option>\n                  </select>\n                  <div class=\"alert alert-warning\" *ngIf=\"job.errors?.required && job.touched || serviceSelectionReq\">\n                    This field is required.\n                  </div>\n              </div>\n              <div class=\"form-group\">\n                  <label for=\"email\">Email:</label>\n                  <input class=\"form-control\" #email=\"ngModel\" [(ngModel)]=\"contactInfo.email\" id=\"email\" [pattern]=\"emailPattern\" placeholder=\"Enter email\" name=\"email\" size=\"30\" required appUpdateOnblur>\n                  <div class=\"alert alert-warning\" *ngIf=\"email.errors?.required && email.touched\">\n                    Email is required.\n                  </div>\n                  <div class=\"alert alert-warning\" *ngIf=\"email.errors?.pattern && email.touched\">\n                    Please enter a valid email\n                  </div>\n              </div>\n            </div>\n          </div>\n          <div class=\"row\">\n            <div class=\"col-md-12\">\n              <div class=\"form-check-inline\">\n                <label class=\"form-check-label\">\n                  <input type=\"radio\" class=\"form-check-input\" [(ngModel)]=\"paymentSelection\" (ngModelChange)=\"onChange($event)\" name=\"optradio\"  [value]=\"true\">Pay only booking fee\n                </label>\n              </div>\n              <div class=\"form-check-inline\">\n                <label class=\"form-check-label\">\n                  <input type=\"radio\" class=\"form-check-input\"  [(ngModel)]=\"paymentSelection\" (ngModelChange)=\"onChange($event)\" name=\"optradio\" [value]=\"false\">Pay booking fee + full service fee\n                </label>\n              </div>\n            </div>\n          </div>\n          <div class=\"row\">\n            <div class=\"col-md-12\">\n              <ngx-stripe-card [options]=\"cardOptions\"></ngx-stripe-card>\n              <div id=\"card-errors\" role=\"alert\"></div>\n            </div>\n          </div>\n          <div class=\"row\">\n            <div class=\"col-md-12\">\n              <p></p>\n              <p>Your Name is: </p><h2>{{contactInfo?.name}}</h2>\n\n              <p>Your Email is: </p><h2>{{contactInfo?.email}}</h2>\n              <p>Your Appointment is on: </p><h2>{{contactInfo?.bookingDate | amDateFormat:'MMMM Do YYYY, h:mm:ss a' }}</h2>\n              <p>Your Service Cost is: </p><h2>${{contactInfo?.job?.price | priceFilter}}</h2>\n              <p>Total balance: </p><h2>${{paymentAmount | priceFilter}}</h2>\n              <p><em>Booking fee is mandatory for all appointments, then the difference will be paid in person at barber shop or you can pay in full here by choosing the option pay booking fee and full service fee</em></p>\n            </div>\n          </div>\n          <div class=\"row\">\n            <div class=\"col-md-12\">\n              <button [disabled]=\"clientForm.invalid\" (click)=emailUser() type=\"submit\" class=\"btn btn-primary btn-block\">Book + Pay</button>\n            </div>\n          </div>\n          <br>\n        </form>\n    </div>\n</section>\n\n\n\n \n\n\n\n\n\n  \n"
 
 /***/ }),
 
@@ -897,9 +1023,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/esm5/router.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/esm5/http.js");
 /* harmony import */ var _service_client_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../service/client.service */ "./src/app/service/client.service.ts");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ngx-cookie-service */ "./node_modules/ngx-cookie-service/index.js");
+/* harmony import */ var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ngx-cookie-service */ "./node_modules/ngx-cookie-service/index.js");
+/* harmony import */ var ngx_stripe__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ngx-stripe */ "./node_modules/ngx-stripe/esm5/ngx-stripe.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -916,63 +1041,60 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var EmailContactsComponent = (function () {
-    function EmailContactsComponent(_http, router, cookieService, clientService) {
+    function EmailContactsComponent(_http, router, cookieService, clientService, stripeService) {
         this._http = _http;
         this.router = router;
         this.cookieService = cookieService;
         this.clientService = clientService;
+        this.stripeService = stripeService;
         this.emailPattern = "([a-zA-Z0-9]+)([\\_\\.\\-{1}])?([a-zA-Z0-9]+)\\@([a-zA-Z0-9]+)([\\.])([a-zA-Z\\.]+)";
         this.namePattern = "^[a-zA-ZùûüÿàâæçéèêëïîôÙÛÜÀÂÆÇÉÈÊËÏÎÔ '-]+$";
         this.edit = false;
+        this.twoWeeks = 14;
+        this.serviceSelectionReq = false;
+        this.buttonValid = false;
         this.hairStore = [
-            { 'hairjob': 'Hair Cut', 'price': 25 },
-            { 'hairjob': 'Line Up', 'price': 15 },
-            { 'hairjob': 'Beard Clean Up', 'price': 15 }
+            { 'hairjob': 'Hair Cut', 'price': '3000' },
+            { 'hairjob': 'Line Up', 'price': '2500' },
+            { 'hairjob': 'Beard Clean Up', 'price': '2500' }
         ];
+        this.bookingFee = 1500;
         this.contactInfo = {
             email: '',
             name: '',
-            bookingDate: null,
+            bookingDate: '',
             job: ''
         };
-        this.valid = false;
         this.appointmentBooked = false;
+        this.cardOptions = {
+            style: {
+                base: {
+                    iconColor: '#666EE8',
+                    color: '#31325F',
+                    lineHeight: '40px',
+                    fontWeight: 300,
+                    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                    fontSize: '18px',
+                    '::placeholder': {
+                        color: '#CFD7E0'
+                    }
+                }
+            },
+            hidePostalCode: true
+        };
+        this.filterSundays = function (d) {
+            var day = d.getDay();
+            return day !== 6;
+        };
     }
     EmailContactsComponent.prototype.ngOnInit = function () {
-        this.loadForm();
         this.csrftoken = this.cookieService.get('XSRF-TOKEN');
-    };
-    EmailContactsComponent.prototype.loadForm = function () {
-        jquery__WEBPACK_IMPORTED_MODULE_4__(document).ready(function () {
-            jquery__WEBPACK_IMPORTED_MODULE_4__("#emailForm").load(function () {
-                jquery__WEBPACK_IMPORTED_MODULE_4__("#emailForm").fadeIn('slow');
-            });
-        });
+        this.paymentSelection = true;
+        this.paymentAmount = this.bookingFee;
+        this.endDate = this.setValidDate();
     };
     EmailContactsComponent.prototype.emailUser = function () {
-        //const formattedDate = moment(this.contactInfo.bookingDate).format('LLLL');
-        var _this = this;
-        this.data_ = {
-            'name': this.contactInfo.name,
-            'email': this.contactInfo.email,
-            'date': this.contactInfo.bookingDate,
-            'job': this.contactInfo.job
-        };
-        this.clientData = JSON.stringify(this.data_);
-        this.clientService.saveClient(this.data_).subscribe(function (data) {
-            console.log('saving data:' + data);
-        });
-        this.clientService.sendClientData(this.data_).subscribe(function (data) {
-            console.log(_this.data_);
-            if (data) {
-                _this.appointmentBooked = data.success;
-                console.log("successfully sent email");
-                _this.router.navigate(['success', { 'client': _this.clientData }]);
-            }
-            else {
-                console.log("opps something went wrong");
-            }
-        });
+        this.payment();
     };
     EmailContactsComponent.prototype.disableEnterKey = function (event) {
         if (event.keyCode === 13) {
@@ -991,19 +1113,93 @@ var EmailContactsComponent = (function () {
             console.log('testing');
         }
     };
-    EmailContactsComponent.prototype.toggle = function () {
-        this.edit = !this.edit;
+    EmailContactsComponent.prototype.onChange = function () {
+        if (!this.contactInfo.job) {
+            this.serviceSelectionReq = true;
+        }
+        else {
+            this.serviceSelectionReq = false;
+            this.paymentAmount = this.paymentSelection ? this.bookingFee : this.bookingFee + parseInt(this.contactInfo.job['price']);
+        }
     };
-    EmailContactsComponent.prototype.onSuccess = function () {
-        this.valid = this.clientService.validateUser();
+    EmailContactsComponent.prototype.stripeResponseHandler = function (data) {
+        if (data) {
+            this.clientService.pay(data).subscribe(function (data) {
+                console.log(data);
+            });
+        }
     };
+    EmailContactsComponent.prototype.payment = function () {
+        var _this = this;
+        this.data_ = {
+            'name': this.contactInfo.name,
+            'email': this.contactInfo['email'].substring(0, this.contactInfo['email'].indexOf('@')) + '*******',
+            'date': this.contactInfo.bookingDate,
+            'job': this.contactInfo.job
+        };
+        this.dataOriginal = {
+            'name': this.contactInfo.name,
+            'email': this.contactInfo.email,
+            'date': this.contactInfo.bookingDate,
+            'job': this.contactInfo.job
+        };
+        this.clientData = JSON.stringify(this.data_);
+        this.clientService.saveClient(this.dataOriginal).subscribe(function (data) {
+            console.log('saving data:' + data);
+        });
+        this.buttonValid = true;
+        this.stripeService
+            .createToken(this.card.getCard(), undefined)
+            .subscribe(function (result) {
+            if (result.token) {
+                console.log(result.token);
+                _this.stripeResponseHandler({
+                    amount: _this.paymentAmount,
+                    currency: 'cad',
+                    source: result.token
+                });
+                _this.clientService.sendClientData(_this.data_).subscribe(function (data) {
+                    console.log(_this.data_);
+                    if (data) {
+                        _this.appointmentBooked = data.success;
+                        console.log("successfully sent email");
+                        _this.router.navigate(['success', { client: _this.clientData }]);
+                    }
+                    else {
+                        console.log("opps something went wrong");
+                    }
+                });
+            }
+            else if (result.error) {
+                _this.buttonValid = false;
+                // Error creating the token
+                var errorElement = document.getElementById('card-errors');
+                errorElement.textContent = result.error.message;
+                console.log(result.error.message);
+            }
+        });
+    };
+    EmailContactsComponent.prototype.setValidDate = function () {
+        var currentDay = new Date().getUTCDate();
+        var month = new Date().getMonth();
+        var year = new Date().getFullYear();
+        var hour = new Date().getHours();
+        var minutes = new Date().getMinutes();
+        var twoWeekFromNow = currentDay + this.twoWeeks;
+        this.startDate = new Date(year, month, currentDay, 12, 30);
+        return new Date(year, month, twoWeekFromNow, 23, 30);
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])(ngx_stripe__WEBPACK_IMPORTED_MODULE_5__["StripeCardComponent"]),
+        __metadata("design:type", ngx_stripe__WEBPACK_IMPORTED_MODULE_5__["StripeCardComponent"])
+    ], EmailContactsComponent.prototype, "card", void 0);
     EmailContactsComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-email-contacts',
             template: __webpack_require__(/*! ./email-contacts.component.html */ "./src/app/pages/email-contacts/email-contacts.component.html"),
             styles: [__webpack_require__(/*! ./email-contacts.component.css */ "./src/app/pages/email-contacts/email-contacts.component.css")]
         }),
-        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], ngx_cookie_service__WEBPACK_IMPORTED_MODULE_5__["CookieService"], _service_client_service__WEBPACK_IMPORTED_MODULE_3__["ClientService"]])
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], ngx_cookie_service__WEBPACK_IMPORTED_MODULE_4__["CookieService"], _service_client_service__WEBPACK_IMPORTED_MODULE_3__["ClientService"], ngx_stripe__WEBPACK_IMPORTED_MODULE_5__["StripeService"]])
     ], EmailContactsComponent);
     return EmailContactsComponent;
 }());
@@ -1340,6 +1536,7 @@ var LoginAppComponent = (function () {
     }
     LoginAppComponent.prototype.ngOnInit = function () {
         this.showAlert = true;
+        this.clientService.fetchToken().subscribe();
     };
     LoginAppComponent.prototype.login = function () {
         var _this = this;
@@ -1466,7 +1663,7 @@ var LogoutComponent = (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".mani-section {\r\n  padding-bottom: 100px;\r\n  background-color: #ffffff;\r\n}\r\n\r\n/*.pay-title{\r\n  position: absolute;\r\n  padding: 100px;\r\n}*/\r\n\r\n.header-section {\r\n  padding-top: 50px;\r\n  background-color: #ffffff;\r\n  font-family: Georgia, serif;\r\n}\r\n\r\n.list-service{\r\n  list-style-type: none;\r\n  margin: 0;\r\n  padding: 0;\r\n  overflow: hidden;\r\n}\r\n\r\n.list {\r\n  display: block;\r\n  float:left;\r\n  text-align: center;\r\n  padding: 16px;\r\n}\r\n\r\n@media only screen and (max-width:375px){\r\n  .mani-section{\r\n    padding: 0px;\r\n  }\r\n  .header-section{\r\n    padding: 0px;\r\n    text-align: none;\r\n  }\r\n  h1 {\r\n    font-size: 30px;\r\n  }\r\n\r\n  .list-service{\r\n    list-style-type: none;\r\n    margin: 0;\r\n    padding: 0;\r\n    overflow: hidden;\r\n  }\r\n\r\n  .list {\r\n    display: block;\r\n    float:left;\r\n    clear:left;\r\n    text-align: center;\r\n    padding: 6px;\r\n  }\r\n\r\n}\r\n\r\n@media only screen and (max-width:414px){\r\n  .mani-section{\r\n    padding: 0px;\r\n  }\r\n  .header-section{\r\n    padding: 0px;\r\n    text-align: none;\r\n  }\r\n  .list {\r\n    display: block;\r\n    float:left;\r\n    clear:left;\r\n    text-align: center;\r\n    padding: 6px;\r\n  }\r\n}\r\n"
+module.exports = ".mani-section {\r\n  padding-top: 100px;\r\n  padding-bottom: 100px;\r\n  background-color: #ffffff;\r\n}\r\n\r\n/*.pay-title{\r\n  position: absolute;\r\n  padding: 100px;\r\n}*/\r\n\r\n.header-section {\r\n  padding-top: 50px;\r\n  background-color: #ffffff;\r\n  font-family: Georgia, serif;\r\n}\r\n\r\n.list-service{\r\n  list-style-type: none;\r\n  margin: 0;\r\n  padding: 0;\r\n  overflow: hidden;\r\n}\r\n\r\n.list {\r\n  display: block;\r\n  float:left;\r\n  text-align: center;\r\n  padding: 16px;\r\n}\r\n\r\n@media only screen and (max-width:375px){\r\n  .mani-section{\r\n    padding: 0px;\r\n  }\r\n  .header-section{\r\n    padding: 0px;\r\n    text-align: none;\r\n  }\r\n  h1 {\r\n    font-size: 30px;\r\n  }\r\n\r\n  .list-service{\r\n    list-style-type: none;\r\n    margin: 0;\r\n    padding: 0;\r\n    overflow: hidden;\r\n  }\r\n\r\n  .list {\r\n    display: block;\r\n    float:left;\r\n    clear:left;\r\n    text-align: center;\r\n    padding: 6px;\r\n  }\r\n\r\n}\r\n\r\n@media only screen and (max-width:414px){\r\n  .mani-section{\r\n    padding: 0px;\r\n  }\r\n  .header-section{\r\n    padding: 0px;\r\n    text-align: none;\r\n  }\r\n  .list {\r\n    display: block;\r\n    float:left;\r\n    clear:left;\r\n    text-align: center;\r\n    padding: 6px;\r\n  }\r\n}\r\n\r\n.StripeElement {\r\n  background-color: white;\r\n  height: 40px;\r\n  padding: 10px 12px;\r\n  border-radius: 4px;\r\n  border: 1px solid transparent;\r\n  box-shadow: 0 1px 3px 0 #e6ebf1;\r\n  transition: box-shadow 150ms ease;\r\n}\r\n\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -1477,7 +1674,7 @@ module.exports = ".mani-section {\r\n  padding-bottom: 100px;\r\n  background-co
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"header-section\">\n  <div class=\"container-fluid\">\n    <div class=\"row\">\n      <div class=\"col-md-5 \">\n        <h2 class=\"pay-title\">Invoice</h2>\n        <ul class=\"list-service\">\n          <li class=\"list\">1. Pay Here</li>\n          <li class=\"list\">2. It's faster</li>\n          <li class=\"list\">3. And more convenient</li>\n        </ul>\n      </div>\n    </div>\n  </div>\n</section>\n\n<section class=\"mani-section\">\n  <div class=\"container-fluid\">\n    <form  #payForm=\"ngForm\" novalidate>\n      <div class=\"row\">\n        <div class=\"col-md-3 \">\n          <div class=\"form-group\">\n            <label for=\"cc-card\">Card number:</label>\n            <input class=\"form-control\" #mycard=\"ngModel\" appUpdateOnblur [(ngModel)]=\"contactInfo.bookingDate\" [owlDateTimeTrigger]=\"dt\" [owlDateTime]=\"dt\" id=\"cc-card\" name=\"card\" size=\"30\" required>\n            <div class=\"alert alert-warning\" *ngIf=\"mycard.errors?.required && mycard.touched\">\n              Date is required.\n            </div>\n          </div>\n          <div class=\"form-group\">\n            <label for=\"cc-name\">Name on card:</label>\n            <input class=\"form-control\" appUpdateOnblur  #ccname=\"ngModel\"  id=\"cc-name\" [(ngModel)]=\"contactInfo.name\" placeholder=\"Enter your name\" name=\"ccname\" (keypress)=\"disableShiftKey($event)\" size=\"30\" required minlength=\"2\" [pattern]=\"namePattern\" >\n            <div class=\"alert alert-warning\" *ngIf=\"ccname.errors?.required && ccname.touched\">\n              Name is required.\n            </div>\n            <div class=\"alert alert-warning\" *ngIf=\"ccname.errors?.minlength && ccname.touched\">\n              Name must be at least 2 characters long.\n            </div>\n          </div>\n          <div class=\"form-group\">\n            <label for=\"cc-expiry\">Expiry date:</label>\n            <select  appUpdateOnblur name=\"ccexpiredate\" class=\"form-control\" id=\"cc-expiry\" #ccexpiredate=\"ngModel\" [(ngModel)]=\"contactInfo.ccexpiredate\" required>\n              <option *ngFor=\"let data of hairStore\" [ngValue]=\"data\"> {{data.hairccexpiredate}}</option>\n            </select>\n            <div class=\"alert alert-warning\" *ngIf=\"ccexpiredate.errors?.required && ccexpiredate.touched\">\n              This field is required.\n            </div>\n          </div>\n          <div class=\"form-group\">\n            <label for=\"cc-code\">Security code:</label>\n            <input type=\"number\" class=\"form-control\" #ccemail=\"ngModel\" [(ngModel)]=\"contactInfo.ccemail\" id=\"cc-code\" [pattern]=\"ccemailPattern\" placeholder=\"...\" name=\"card-cord\" size=\"5\" required appUpdateOnblur>\n            <div class=\"alert alert-warning\" *ngIf=\"ccemail.errors?.required && ccemail.touched\">\n              ccemail is required.\n            </div>\n            <div class=\"alert alert-warning\" *ngIf=\"ccemail.errors?.pattern && ccemail.touched\">\n              Please enter a valid ccemail\n            </div>\n          </div>\n          <button [disabled]=\"payForm.invalid\"  type=\"submit\" class=\"btn btn-primary btn-lg btn-block\">Pay</button>\n        </div> <!-- end-of-first-col -->\n      </div>\n    </form>\n  </div>\n</section>\n"
+module.exports = "<!--<section class=\"header-section\">\n  <div class=\"container-fluid\">\n    <div class=\"row\">\n      <div class=\"col-md-5 \">\n        <h2 class=\"pay-title\">Invoice</h2>\n        <ul class=\"list-service\">\n          <li class=\"list\">1. Pay Here</li>\n          <li class=\"list\">2. It's faster</li>\n          <li class=\"list\">3. And more convenient</li>\n        </ul>\n      </div>\n    </div>\n  </div>\n</section>-->\n\n<section class=\"mani-section\">\n  <div class=\"container-fluid\">\n    <form  #payForm=\"ngForm\" novalidate>\n      <div class=\"row\">\n        <div class=\"col-md-4\">\n          <div class=\"form-group\">\n            <div id=\"card-element\" class=\"field\"></div>\n            <br>\n            <div id=\"card-errors\" role=\"alert\"></div>\n            <br>\n            <button [disabled]=\"buttonValid\" class=\"btn btn-primary btn-block\" (click)=\"buy()\" type=\"submit\">Submit Payment</button>\n          </div>\n        </div>\n      </div>\n    </form>\n  </div>\n</section>\n\n\n\n\n"
 
 /***/ }),
 
@@ -1492,6 +1689,9 @@ module.exports = "<section class=\"header-section\">\n  <div class=\"container-f
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PayComponent", function() { return PayComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var _service_client_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../service/client.service */ "./src/app/service/client.service.ts");
+/* harmony import */ var ngx_stripe__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ngx-stripe */ "./node_modules/ngx-stripe/esm5/ngx-stripe.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/esm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1502,23 +1702,99 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
 var PayComponent = (function () {
-    function PayComponent() {
-        this.hairStore = [
-            { 'hairjob': 'Hair Cut', 'price': 25 },
-            { 'hairjob': 'Line Up', 'price': 15 },
-            { 'hairjob': 'Beard Clean Up', 'price': 15 }
-        ];
+    function PayComponent(clientService, stripeService, router) {
+        this.clientService = clientService;
+        this.stripeService = stripeService;
+        this.router = router;
+        this.buttonValid = false;
     }
-    PayComponent.prototype.ngOnInit = function () {
+    PayComponent.prototype.ngAfterViewInit = function () {
+        var _this = this;
+        this.stripeService.elements().subscribe(function (elements) {
+            _this.elements = elements;
+            // Only mount the element the first time
+            if (!_this.card) {
+                _this.card = _this.elements.create('card', {
+                    style: {
+                        base: {
+                            iconColor: '#666EE8',
+                            color: '#31325F',
+                            lineHeight: '40px',
+                            fontWeight: 300,
+                            fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                            fontSize: '18px',
+                            '::placeholder': {
+                                color: '#CFD7E0'
+                            }
+                        }
+                    },
+                    hidePostalCode: true
+                });
+                _this.card.mount('#card-element');
+            }
+            _this.card.addEventListener('change', function (event) {
+                var displayError = document.getElementById('card-errors');
+                if (event.error) {
+                    displayError.setAttribute("class", "alert alert-warning");
+                    displayError.textContent = event.error.message;
+                }
+                else {
+                    displayError.removeAttribute("class");
+                    displayError.textContent = null;
+                }
+            });
+        });
     };
+    PayComponent.prototype.buy = function () {
+        var _this = this;
+        this.buttonValid = true;
+        this.stripeService
+            .createToken(this.card, undefined)
+            .subscribe(function (result) {
+            if (result.token) {
+                console.log(result.token);
+                _this.stripeResponseHandler({
+                    amount: _this.amountToCharge,
+                    currency: 'usd',
+                    source: result.token
+                });
+                _this.router.navigate(['confirmation']);
+            }
+            else if (result.error) {
+                _this.buttonValid = false;
+                // Error creating the token
+                var errorElement = document.getElementById('card-errors');
+                errorElement.textContent = result.error.message;
+                console.log(result.error.message);
+            }
+        });
+    };
+    PayComponent.prototype.stripeResponseHandler = function (data) {
+        if (data) {
+            this.clientService.pay(data).subscribe(function (data) {
+                console.log(data);
+            });
+        }
+    };
+    PayComponent.prototype.ngOnDestroy = function () {
+        //this.card.removeEventListener('change', this.cardHandler);
+        this.card.destroy();
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], PayComponent.prototype, "amountToCharge", void 0);
     PayComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-pay',
             template: __webpack_require__(/*! ./pay.component.html */ "./src/app/pages/pay/pay.component.html"),
             styles: [__webpack_require__(/*! ./pay.component.css */ "./src/app/pages/pay/pay.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_service_client_service__WEBPACK_IMPORTED_MODULE_1__["ClientService"], ngx_stripe__WEBPACK_IMPORTED_MODULE_2__["StripeService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
     ], PayComponent);
     return PayComponent;
 }());
@@ -1644,7 +1920,7 @@ module.exports = ".mani-section {\r\n    padding: 90px;\r\n    background-color:
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<section class=\"mani-section section\">\n    <div class=\"container-fluid text-center\">\n         <div class=\"text-left details\">\n           <h2>Congratulations Appointment Booked:</h2>\n           <p>Please see below for details</p>\n           <p>Your Appointment is Booked For: <b>{{clientDetails.date | amDateFormat:'MMMM Do YYYY, h:mm:ss a'}}</b></p>\n           <p>Price for service: <b>{{clientDetails.job['price']}}</b></p>\n           <p>Service requested: <b>{{clientDetails.job['hairjob']}}</b></p>\n           <p>Copy of Appointment Sent to : <b>{{clientDetails.email}}</b></p>\n           <span><a href=\"/home\">Click here to return to home page</a></span>\n         </div>       \n      </div>\n</section>\n\n\n"
+module.exports = "<section class=\"mani-section section\">\n    <div class=\"container-fluid text-center\">\n         <div class=\"text-left details\">\n           <h2>Congratulations Appointment Booked:</h2>\n           <p>Please see below for details</p>\n           <p>Your Appointment is Booked For: <b>{{clientDetails.date | amDateFormat:'MMMM Do YYYY, h:mm:ss a'}}</b></p>\n           <p>Price for service: <b>${{clientDetails.job['price'] | priceFilter}}</b></p>\n           <p>Service requested: <b>{{clientDetails.job['hairjob']}}</b></p>\n           <p>Copy of Appointment Sent to : <b>{{clientDetails.email}}</b></p>\n           <p>Thank you for your business payment received</p>\n           <span><a href=\"/home\">Click here to return to home page</a></span>\n         </div>       \n      </div>\n</section>\n\n\n"
 
 /***/ }),
 
@@ -1734,8 +2010,7 @@ var ClientService = (function () {
         this._http = _http;
         this.cookieService = cookieService;
         this.HEADERS = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
-            'Content-Type': 'application/json',
-            'X-XSRF-TOKEN': this.cookieService.get('XSRF-TOKEN')
+            'Content-Type': 'application/json'
         });
     }
     ClientService.prototype.fetchClients = function () {
@@ -1763,7 +2038,10 @@ var ClientService = (function () {
         return this._http.post("/client/authenticate", data, { headers: this.HEADERS, observe: 'response' });
     };
     ClientService.prototype.fetchToken = function () {
-        return this._http.get("/client/token");
+        return this._http.get("/client/token", { headers: this.HEADERS, observe: 'response' }).map(function (response) { return response; });
+    };
+    ClientService.prototype.pay = function (data) {
+        return this._http.post("/client/pay", data, { headers: this.HEADERS, observe: 'response' });
     };
     ClientService.prototype.storeUserData = function (token) {
         localStorage.setItem('jwt_token', token);

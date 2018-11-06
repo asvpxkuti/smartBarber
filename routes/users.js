@@ -8,37 +8,98 @@ const Client = require('../models/Clients');
 const barberUser = require('../models/Users');
 var nodemailer = require('nodemailer');
 var stripe = require("stripe")("sk_test_8KEn27WVr2fRHz847DSzDjpf");
-const csurf =  require('csurf');
 
-const csrfMiddleware = csurf({
-  cookie: {
-    key:'XSRF-TOKEN',
-  }
+
+router.get('/token',(req, res) =>{
+  res.json({'tokenCreated':true});
 });
-
 /* GET ALL CLIENT */
 router.get('/', function(req, res) {
   Client.find().sort({date:'asc'}).exec(function (err, clients) {
     if (err){
-      handleError(res,err.message,'data not found');
+      if (err) return next(err);
     }
     res.json(clients);
   });   
 });
 
+router.get('/getDates', function(req, res) {
+  Client.find({},function (err, clients) {
+    if (err){
+      if (err) return next(err);
+    }else{
+      var currentTime = new Date().getTime();
+      clients.forEach((obj)=>{
+        console.log("current time is : "+currentTime);
+        //console.log(obj);
+        const clientTime = new Date(obj['date']).getTime();
+        console.log(new Date(obj['date']).getTime());
+        compareTime(currentTime, clientTime,obj.email,obj['job'].hairjob,obj.date);  
+      }) 
+    }
+    
+   })
+});
+
 /* PAY CLIENT */
 router.post('/pay', function(req, res, next) {
   stripe.charges.create({
-    amount: 2000,
-    currency: "cad",
-    source: "tok_visa", // obtained with Stripe.js
-    description: "Charge for jenny.rosen@example.com"
+    amount: req.body.amount,
+    currency: req.body.currency,
+    source: req.body.source['id'], // obtained with Stripe.js
+    description: "Charge for geecutz"
   }, function(err, charge) {
     // asynchronously called
     if(err) return next(err);
     res.json(charge);
   });
 });
+
+function compareTime(date1, date2,clientEmail,service,serviceDate){
+  var diff = date1 - date2;
+  if(diff > 30000 || diff == 30000){
+    console.log("send email");
+    
+    nodemailer.createTestAccount((err, account) => {
+      // create reusable transporter object using the default SMTP transport
+      let transporter = nodemailer.createTransport({
+          host: 'smtp.gmail.com',
+          service:'gmail',
+          //port: 587,
+         // true for 465, false for other ports
+          auth: {
+              user: 'geecuts1@gmail.com', // generated ethereal user
+              pass: 'geecutz9087' // generated ethereal password
+          },
+           tls: {
+            rejectUnauthorized: false
+        }
+      });
+    
+      // setup email data with unicode symbols
+      let mailOptions = {
+          from: '"Geecuts" <geecuts1@gmail.com>', // sender address
+          to: clientEmail+','+'geecuts1@gmail.com', // list of receivers
+          subject: 'Appointment Reminder', // Subject line
+          text: 'Thank you for your business', // plain text body
+          html: '<h2>This is a reminder of your Appointment:</h2>'+
+          '<p>Please see below for details</p>'+
+          '<p>Your Appointment is Booked For: <b>'+serviceDate+'</b></p>'+
+          '<p>Price for service: <b>'+service+'</b></p>'
+      };
+    
+      // send mail with defined transport object
+      transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+              return res.json({success:false,msg:'something went wrong'});
+          }else{
+            res.json({msg:'email sent',success:true});
+          }
+         
+      });
+    });
+  }
+}
 
 
 /* GET SINGLE CLIENT BY ID */
@@ -121,14 +182,6 @@ router.delete('/:id', function(req, res, next) {
   
 });
 
-/* router.get('/goku',(req, res) =>{
-  res.json({'tokenCreated':true});
-});
-
-router.post('/goku',(req, res) =>{
-    console.log(JSON.stringify(req.body));
-    res.json({msg:"csurf works"});
-}); */
 
 router.post('/authenticate', (req, res) => {
   barberUser.findOne({
