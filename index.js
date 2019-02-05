@@ -3,16 +3,18 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const mongoose = require('mongoose');
-const config = require('./config/database');
-const csurf =  require('csurf');
+const config = require('./config/properties');
+const session = require('express-session');
+//const csurf =  require('csurf');
 const cors = require("cors");
 const cookieParser = require('cookie-parser');
 const stripe = require("stripe");
-
-
+const shopHandler = require('./routes/shopRouter');
+const clientHandler = require('./routes/clientRouter');
+const MongoDBStore = require('connect-mongodb-session')(session);
 
 // Connect To Database (OLD CODE)
-mongoose.connect(config.database, { useMongoClient: true});
+mongoose.connect(config.database,{ useNewUrlParser: true });
 // On Connection
 mongoose.connection.on('connected', () => {
   //mongoose.connection.db.dropDatabase();
@@ -23,13 +25,20 @@ mongoose.connection.on('error', (err) => {
   console.log('Database error '+err);
 });
 
-
-const app = express();
-app.use(express.static(path.join(__dirname, 'public')));
-const users = require('./routes/users');
-
 // Port Number
 const port = process.env.PORT || 5000;
+
+const app = express();
+
+const appStore = new MongoDBStore({
+  uri:config.database,
+  collection:'appSession'
+});
+
+appStore.on('error', function(error) {
+  console.log(error);
+});
+
 
 // CORS Middleware
 const cookieOptions = {
@@ -40,44 +49,41 @@ const cookieOptions = {
 }
 
 const corsOptions = {
+  allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "X-Access-Token"],
+  credentials: true,
+  methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
   origin: 'http://localhost:4200',
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204 
+  preflightContinue: false
 };
 
+app.use('/uploads',express.static(path.join(__dirname, 'uploads')));
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Passport Middleware
-app.use(passport.initialize());
-app.use(passport.session());
-
-require('./config/passport')(passport);
 
 app.use(cookieParser());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(require("express-session")({ 
-    name: 'sessionID', 
-    secret: "hello world", 
-    cookie: {
-        path: '/',
-        httpOnly: false,
-        secure: false,
-        maxAge: 3600000
+app.use(session(
+  {
+    name:'APPSESSIONID',
+    secret: config.sessionSecret,
+    resave:false,
+    saveUninitialized:true,
+    store:appStore,
+    cookie:{
+      expires:new Date(Date.now() + config.sessionTime),
+      maxAge:config.sessionTime
     },
-    rolling: true, 
-    resave: false, 
-    saveUninitialized: true 
-}));
-app.use(cors(corsOptions));
-app.use(csurf());
-app.use(function(req, res, next) {
-    res.cookie('XSRF-TOKEN', req.csrfToken());
-    next();
-});
-app.use('/client', users);
+    
+    }));
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use(passport.initialize());
+app.use(cors(corsOptions));
+app.use('/Shop', shopHandler);
+app.use('/Client', clientHandler);
 
 // Index Routes
- app.get('/', (req, res) => {
+app.get('/', (req, res) => {
   res.send('invaild endpoint');
 }); 
 
@@ -90,3 +96,6 @@ app.get('*',(req, res) => {
 app.listen(port, () => {
   console.log('Server started on port '+port);
 });
+
+
+module.exports = app;

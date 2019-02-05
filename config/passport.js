@@ -1,14 +1,14 @@
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
-const User = require('../models/user');
-const config = require('../config/database');
+const shopUser = require('../models/ShopModel');
+const config = require('./properties');
 
 module.exports = function(passport) {
   let opts = {};
-  opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt');
+  opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('Bearer');
   opts.secretOrKey = config.secret;
-  passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
-    User.getUserById(jwt_payload.data._id, (err, user) => {
+  const strategy = new JwtStrategy(opts, (jwt_payload, done) => {
+    shopUser.getShopAccountById(jwt_payload._id, (err, user) => {
       if(err) {
         return done(err, false);
       }
@@ -19,5 +19,6 @@ module.exports = function(passport) {
         return done(null, false);
       }
     });
-  }));
+  })
+  passport.use(strategy);
 }
