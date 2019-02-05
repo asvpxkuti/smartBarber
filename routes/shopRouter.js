@@ -27,17 +27,6 @@ let upload = multer({ //multer settings
 
 require('../config/passport')(passport);
 
-/* router.get("/secretDebug",
-  function(req, res, next){
-    console.log(req.get('Authorization'));
-    next();
-  }, function(req, res){
-    res.json("debugging");
-});
-
-router.get('/TestToken',passport.authenticate('jwt', {session:false}), (req,res) => { 
-  res.json({message: "Success! You can not see this without a token"});
-}); */
 router.get('/GetAllShops', (req,res)=>{
   shopAccount.find({},function(err, users){
     if(err) throw err;

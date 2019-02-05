@@ -2409,6 +2409,7 @@ var ShopEffects = /** @class */ (function () {
             }
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(function (err) { return Object(rxjs_observable_of__WEBPACK_IMPORTED_MODULE_4__["of"])(new _actions__WEBPACK_IMPORTED_MODULE_7__["fetchAllBusinessessFailed"](err)); })); }));
         this.searchShop$ = this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_1__["ofType"])(_actions__WEBPACK_IMPORTED_MODULE_7__["SEARCH_SHOP"]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["mergeMap"])(function (action) { return _this.shopService.searchShop(action.payload).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (data) {
+            debugger;
             if (data) {
                 _this.router.navigate(['shops']);
                 return new _actions__WEBPACK_IMPORTED_MODULE_7__["fetchAllBusinessessSuccess"](data);
@@ -4211,9 +4212,9 @@ var HomeAppComponent = /** @class */ (function () {
     };
     HomeAppComponent.prototype.createLoginForm = function () {
         return this.fb.group({
-            type: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', { validators: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, updateOn: 'blur' }),
-            email: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', { validators: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, updateOn: 'blur' }),
-            password: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', { validators: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, updateOn: 'blur' }),
+            type: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', { validators: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, updateOn: 'change' }),
+            email: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', { validators: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, updateOn: 'change' }),
+            password: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', { validators: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, updateOn: 'change' }),
         });
     };
     HomeAppComponent.prototype.login = function () {
@@ -4964,7 +4965,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"mn-section\">\n  <div class=\"container\">\n    <div class=\"row\">\n      <div class=\"col-md-10 offset-md-0\">\n        <div class=\"row\">\n          <div class=\"col-sm-12\">\n            <input id=\"searchField\" (change)=\"onSearchChange($event.target.value)\" class=\"input-control\" type=\"text\" placeholder=\"Search... eg. Toronto\">\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"container\" *ngFor=\"let shop of shopDetails\">\n    <div class=\"row card\">\n      <div class=\"col-md-10 offset-md-0\">\n        <div class=\"row\">\n          <div class=\"col-md-4\">\n            <img class=\"rounded-circle\" src=\"../../../assets/img/geecut6.jpeg\" alt=\"Profile image\" style=\"width: 200px; height: 200px;\">\n          </div>\n          <div class=\"col-md-8\">\n            <span>{{shop?.businessName}}</span><br>\n            <span><i class=\"fa fa-envelope icon-padding\"></i>{{shop?.email}}</span><br>\n            <span><i class=\"fa fa-phone-square icon-padding\"></i>{{shop?.contactInfo?.phoneNumber}}</span><br>\n            <h6>Address</h6>\n            <span>{{shop?.contactInfo?.address_?.street_number}} {{shop?.contactInfo?.address_?.route}}</span>\n            <span> {{shop?.contactInfo?.address_?.locality}} {{shop?.contactInfo?.address_?.administrative_area_level_1}}{{comma}}{{shop?.contactInfo?.address_?.postal_code}} {{shop?.contactInfo?.address_?.country}}</span><br>\n            <ul class=\"list-inline\">\n              <li class=\"list-inline-item\"><button (click)=\"viewShop(shop?._id)\" type=\"button\" class=\"btn btn-primary\">View Shop</button></li>\n            </ul>\n          </div>\n        </div>\n      </div>\n    </div>\n    <br>\n  </div>\n</div>\n\n"
+module.exports = "<div class=\"mn-section\">\n  <div class=\"container\">\n    <div class=\"row\">\n      <div class=\"col-md-10 offset-md-0\">\n        <div class=\"row\">\n          <div class=\"col-sm-8\">\n            <input id=\"searchField\" (change)=\"onSearchChange($event.target.value)\" class=\"input-control\" type=\"text\" placeholder=\"Search... eg. Toronto\">\n          </div>\n          <!-- <div class=\"col-sm-4\">\n            <button class=\"btn btn-secondary\" id=\"searchButton\" (click)=\"onSearchChange($event.target.value)\"  type=\"text\">Search</button> \n          </div> -->\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"container\" *ngFor=\"let shop of shopDetails\">\n    <div class=\"row card\">\n      <div class=\"col-md-10 offset-md-0\">\n        <div class=\"row\">\n          <div class=\"col-md-4\">\n            <img class=\"rounded-circle\" src=\"../../../assets/img/geecut6.jpeg\" alt=\"Profile image\" style=\"width: 200px; height: 200px;\">\n          </div>\n          <div class=\"col-md-8\">\n            <span>{{shop?.businessName}}</span><br>\n            <span><i class=\"fa fa-envelope icon-padding\"></i>{{shop?.email}}</span><br>\n            <span><i class=\"fa fa-phone-square icon-padding\"></i>{{shop?.contactInfo?.phoneNumber}}</span><br>\n            <h6>Address</h6>\n            <span>{{shop?.contactInfo?.address_?.street_number}} {{shop?.contactInfo?.address_?.route}}</span>\n            <span> {{shop?.contactInfo?.address_?.locality}} {{shop?.contactInfo?.address_?.administrative_area_level_1}}{{comma}}{{shop?.contactInfo?.address_?.postal_code}} {{shop?.contactInfo?.address_?.country}}</span><br>\n            <ul class=\"list-inline\">\n              <li class=\"list-inline-item\"><button (click)=\"viewShop(shop?._id)\" type=\"button\" class=\"btn btn-primary\">View Shop</button></li>\n            </ul>\n          </div>\n        </div>\n      </div>\n    </div>\n    <br>\n  </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -5016,7 +5017,16 @@ var ShopComponent = /** @class */ (function () {
         this.store.dispatch(new src_app_actions__WEBPACK_IMPORTED_MODULE_2__["viewShop"](id));
     };
     ShopComponent.prototype.onSearchChange = function (event) {
-        this.store.dispatch(new src_app_actions__WEBPACK_IMPORTED_MODULE_2__["searchShop"](event));
+        var searchValue = document.getElementById('searchField');
+        if (searchValue.value !== '') {
+            var data = {
+                city: searchValue.value
+            };
+            this.store.dispatch(new src_app_actions__WEBPACK_IMPORTED_MODULE_2__["searchShop"](data));
+        }
+        else {
+            return;
+        }
     };
     ShopComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
