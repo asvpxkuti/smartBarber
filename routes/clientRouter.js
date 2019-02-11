@@ -142,6 +142,10 @@ router.delete('/CancelMyAppointment/:id', function(req, res, next) {
   Client.cancelMyAppointment(req,res,id)
 });
 
+router.delete('/DeleteClientProfile', function(req, res, next) {
+  Client.deleteClientAccount(req,res)
+});
+
 router.put('/UpdateClient', function(req, res,next){
   Client.updateUserAccount(req,res);
 });
@@ -183,7 +187,6 @@ router.post('/Pay', function(req, res, next) {
 });
 
 router.post('/SaveAppointment', async (req,res,next) => {
-
   const clientId  = req.session.userID;
   const shopId = req.body.id;
   const shopAppointment = new Appointments(req.body);
@@ -195,8 +198,9 @@ router.post('/SaveAppointment', async (req,res,next) => {
     console.log(data);
   });
 
+
   shop.appointments.push(shopAppointment);
-  user.appointment = shopAppointment;
+  user.appointment.push(shopAppointment);
   await user.save({validateBeforeSave:false},function(err,data){
     if(err) return next(err);
     console.log(data);
@@ -213,7 +217,7 @@ router.post('/SaveAppointment', async (req,res,next) => {
   
   /* SAVE CLIENT */
 router.post('/CreateClient', function(req, res, next) {
-  if (!req.body.emailAddress || !req.body.password || !req.body.firstName ) {
+  if (!req.body.email || !req.body.password || !req.body.firstName ) {
     res.json({
       success: false,
       message: 'Please fill out all required fields'

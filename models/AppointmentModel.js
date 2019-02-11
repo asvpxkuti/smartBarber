@@ -39,6 +39,7 @@ appointmentSchema = new mongoose.Schema({
     }
 });
 
+
 const appointments = module.exports = mongoose.model('Appointments', appointmentSchema);
 
 module.exports.addShopDetails = ShopDetails

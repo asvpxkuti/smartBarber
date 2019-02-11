@@ -27,10 +27,10 @@ const ClientSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  appointment:{
+  appointment:[{
     type:Schema.Types.ObjectId,
     ref:'Appointments'
-  },
+  }],
   submitted_date: {type: Date, default: Date.now()},
 });
 
@@ -50,6 +50,7 @@ function generateJwt(client) {
   return token // DO NOT KEEP YOUR SECRET IN THE CODE!
 };
 
+
 function createUserAccount(req,res){
   bcrypt.genSalt(10, (err, salt) => {
       bcrypt.hash(req.body.password, salt,function (err, hash){
@@ -57,9 +58,9 @@ function createUserAccount(req,res){
           const userData = {
               'firstName':req.body.firstName,
               'lastName':req.body.lastName,
-              'email':req.body.emailAddress,
+              'email':req.body.email,
               'password':hash,
-              'phoneNumber':req.body.phoneNumber,
+              'phoneNumber':req.body.phone,
           }
           Client.create(userData,(err,client)=>{
               if(err) throw err;
@@ -110,7 +111,7 @@ function findShopInCity(req,res){
 
 function deleteClientAccount(req,res){
   const userid = req.body.id;
-  Client.findByIdAndUpdate(userid,
+  Client.findByIdAndDelete(userid,
       function(err, result){
           res.json({
               success:true,
@@ -119,6 +120,7 @@ function deleteClientAccount(req,res){
       }
   ) 
 }
+
 
 function cancelMyAppointment(req,res,id){
   Appointments.findByIdAndRemove(id,
@@ -184,5 +186,7 @@ module.exports.findShopInCity = findShopInCity
 module.exports.updateMyAppointment = updateMyAppointment
 
 module.exports.cancelMyAppointment = cancelMyAppointment
+
+module.exports.deleteClientAccount = deleteClientAccount
 
 module.exports.generateJwt = generateJwt
